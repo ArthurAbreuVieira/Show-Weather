@@ -8,13 +8,14 @@ export const Container = styled.View`
 `;
 
 export const Float = styled.Text`
-  font-size: 65px;
+  font-size: 55px;
   color: #000;
   font-weight: 700;
+  margin-left: 18px;
 `;
 
 export const Location = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   color: #000;
   font-weight: 500;
 `;

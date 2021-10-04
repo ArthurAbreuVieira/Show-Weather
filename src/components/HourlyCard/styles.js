@@ -26,6 +26,7 @@ export const HalfBG = styled.View`
   border-bottom-right-radius: ${({ brr }) => brr || 0};
   position: absolute;
   top: ${({ position }) => position==="top"?0:'50%'};
+  z-index: -1;
 `;
 
 export const Content = styled.View`

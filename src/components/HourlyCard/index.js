@@ -14,6 +14,13 @@ import {
 export default function HourlyCard() {
   return (
     <Container>
+      <HalfBG 
+        color="#fff"
+        tlr="40px"
+        trr="40px"
+        position="bottom"
+      />
+
       <Card color="#f58a5b" activeOpacity={.7}>
         <HalfBG 
           color="#e16f7b"
@@ -33,6 +40,7 @@ export default function HourlyCard() {
           color="#7b5f8f"
           blr="20px"
           brr="20px"
+          position="bottom"
         />
         <Content>
           <Hour>18:00</Hour>

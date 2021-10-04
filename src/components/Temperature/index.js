@@ -11,7 +11,7 @@ import {
 export default function Temperature() {
   return (
     <Container>
-      <Ionicons name="sunny-sharp" size={50} color="#ffa53b" />
+      <Ionicons name="sunny-sharp" size={45} color="#ffa53b" />
       <Float>31,9°</Float>
       <Location>Belo Horizonte, Brazil</Location>
     </Container>

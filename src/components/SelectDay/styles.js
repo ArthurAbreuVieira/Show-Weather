@@ -9,7 +9,7 @@ export const Container = styled.View`
 `;
 
 export const Option = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   color: ${({ focused }) => focused ? '#000' : '#bbb'};
   font-weight: 700;
   margin: 0 8px;
