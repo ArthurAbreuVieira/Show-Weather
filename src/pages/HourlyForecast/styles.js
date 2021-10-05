@@ -5,25 +5,16 @@ export const Container = styled.SafeAreaView`
   justify-content: flex-start;
   align-items: center;
   background-color: #ebebeb;
+  /* margin-top: 50px; */
 `;
 
-export const Header = styled.View`
-  background-color: #fff;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 110px;
-
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Section = styled.View`
+export const List = styled.FlatList`
   background-color: #fff;
   width: 100%;
-  justify-content: center;
-  align-items: center;
+  padding-top: 50px;
 `;
+
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 
 export const Title = styled.Text`
   color: ${({ color }) => color || '#000'};;

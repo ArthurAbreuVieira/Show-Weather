@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.View`
   width: 100%;
-  height: 230px;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 `;
 
@@ -45,4 +44,34 @@ export const Hour = styled.Text`
 export const Temperature = styled.Text`
   color: #fff;
   font-size: 20px;
+`;
+
+export const Text = styled.Text`
+  color: ${({ color }) => color || '#000'};
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+  text-shadow: 1px 1px 10px #000;
+`;
+
+export const Button = styled.TouchableOpacity`
+  background-color: ${({ color }) => color || '#49577a'};
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 50px;
+  margin: 5px 0;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  height: ${({ buttonRow }) => buttonRow && '60px' || '200px'};
 `;

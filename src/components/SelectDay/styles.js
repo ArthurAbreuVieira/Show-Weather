@@ -8,7 +8,11 @@ export const Container = styled.View`
   align-items: center;
 `;
 
-export const Option = styled.Text`
+export const Option = styled.TouchableOpacity`
+  padding: 8px;
+`;
+
+export const OptionText = styled.Text`
   font-size: 18px;
   color: ${({ focused }) => focused ? '#000' : '#bbb'};
   font-weight: 700;

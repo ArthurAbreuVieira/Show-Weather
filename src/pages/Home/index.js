@@ -17,7 +17,7 @@ import Temperature from '../../components/Temperature';
 import SelectDay from '../../components/SelectDay';
 import HourlyCard from '../../components/HourlyCard';
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
     <Container>
       {/* <Header>
@@ -31,10 +31,23 @@ export default function Home() {
         contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
       >
 
-      <HourlyCard />
+      <HourlyCard navigation={navigation} />
 
       <Section>
         <Title>Details</Title>
+
+        <Row card style={{marginBottom: 25}}>
+          <RowItem column center >
+            <Text>Nascer do sol</Text>
+            <Feather name="sunrise" size={30} color="orangered" />
+            <Text color="#888" >5:00</Text>
+          </RowItem>
+          <RowItem column center >
+            <Text>Por do sol</Text>
+            <MaterialCommunityIcons name="weather-sunset" size={30} color="orangered" />
+            <Text color="#888" >18:30</Text>
+          </RowItem>
+        </Row>
 
         <Row>
           <RowItem>
@@ -58,20 +71,8 @@ export default function Home() {
           </RowItem>
         </Row>
 
-        <Row card >
-          <RowItem column center >
-            <Text>Nascer do sol</Text>
-            <Feather name="sunrise" size={30} color="orangered" />
-            <Text color="#888" >5:00</Text>
-          </RowItem>
-          <RowItem column center >
-            <Text>Por do sol</Text>
-            <MaterialCommunityIcons name="weather-sunset" size={30} color="orangered" />
-            <Text color="#888" >18:30</Text>
-          </RowItem>
-        </Row>
 
-        <Button activeOpacity={.8}>
+        <Button activeOpacity={.8} onPress={() => navigation.navigate("DailyForecast")}>
           <Title color="#fff">Ver previsão diária</Title>
         </Button>
 
