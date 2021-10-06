@@ -1,19 +1,36 @@
+
 import React from 'react';
 
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import {
   Container,
-  Float,
-  Location
-} from './styles';
+  Text,
+  Card,
+  RowItem,
+} from './styles'
 
 export default function Temperature() {
   return (
     <Container>
-      <Ionicons name="sunny-sharp" size={45} color="#ffa53b" />
-      <Float>31,9°</Float>
-      <Location>Belo Horizonte, Brazil</Location>
+      <RowItem>
+        <Card column center >
+          <Text>Temperatura minima</Text>
+          <Card width="">
+            <FontAwesome5 name="temperature-low" size={35} color="#00a2ff" style={{ top: -5 }} />
+            <Text color="#888" size="30px" >10°</Text>
+          </Card>
+        </Card>
+
+        <Card column center >
+          <Text>Temperatura maxima</Text>
+          <Card width="">
+            <FontAwesome5 name="temperature-high" size={35} color="orangered" style={{ top: -5 }} />
+            <Text color="#888" size="30px" >36°</Text>
+          </Card>
+        </Card>
+      </RowItem>
     </Container>
   );
 }
+

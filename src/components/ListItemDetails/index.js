@@ -3,6 +3,8 @@ import { ScrollView } from 'react-native';
 
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
+import ConditionsDetails from '../ConditionsDetails';
+
 import {
   Container,
   Section,
@@ -17,29 +19,9 @@ import {
 export default function ListItemDetails({ text }) {
   return (
     <Container>
-      <Row>
-        <RowItem>
-          <Text>Wind</Text>
-          <Text color="#aaa" >12 m/h</Text>
-        </RowItem>
-        <RowItem>
-          <Text>Humidity</Text>
-          <Text color="#aaa" >55%</Text>
-        </RowItem>
-      </Row>
+      <ConditionsDetails color="#ededed"/>
 
-      <Row>
-        <RowItem>
-          <Text>Visibility</Text>
-          <Text color="#aaa" >25 km</Text>
-        </RowItem>
-        <RowItem>
-          <Text>UV</Text>
-          <Text color="#aaa" >1</Text>
-        </RowItem>
-      </Row>
-
-      <Row card >
+      <Row card style={{top: -20}}>
         <RowItem column large >
           <Title>Nublado</Title>
           <Text>Poucas nuvens</Text>

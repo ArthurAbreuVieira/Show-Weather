@@ -13,9 +13,11 @@ import {
   Button,
 } from './styles'
 
-import Temperature from '../../components/Temperature';
+import QuickInfo from '../../components/QuickInfo';
 import SelectDay from '../../components/SelectDay';
 import HourlyCard from '../../components/HourlyCard';
+import ConditionsDetails from '../../components/ConditionsDetails';
+import SunDetails from '../../components/SunDetails';
 
 export default function Home({ navigation }) {
   return (
@@ -23,7 +25,7 @@ export default function Home({ navigation }) {
       {/* <Header>
         <Title>Bem Vindo</Title>
       </Header> */}
-      <Temperature />
+      <QuickInfo color="#ededed"/>
       <SelectDay />
 
       <ScrollView 
@@ -32,45 +34,12 @@ export default function Home({ navigation }) {
       >
 
       <HourlyCard navigation={navigation} />
-
+      
       <Section>
         <Title>Details</Title>
 
-        <Row card style={{marginBottom: 25}}>
-          <RowItem column center >
-            <Text>Nascer do sol</Text>
-            <Feather name="sunrise" size={30} color="orangered" />
-            <Text color="#888" >5:00</Text>
-          </RowItem>
-          <RowItem column center >
-            <Text>Por do sol</Text>
-            <MaterialCommunityIcons name="weather-sunset" size={30} color="orangered" />
-            <Text color="#888" >18:30</Text>
-          </RowItem>
-        </Row>
-
-        <Row>
-          <RowItem>
-            <Text>Wind</Text>
-            <Text color="#aaa" >12 m/h</Text>
-          </RowItem>
-          <RowItem>
-            <Text>Humidity</Text>
-            <Text color="#aaa" >55%</Text>
-          </RowItem>
-        </Row>
-
-        <Row>
-          <RowItem>
-            <Text>Visibility</Text>
-            <Text color="#aaa" >25 km</Text>
-          </RowItem>
-          <RowItem>
-            <Text>UV</Text>
-            <Text color="#aaa" >1</Text>
-          </RowItem>
-        </Row>
-
+        <ConditionsDetails />
+        <SunDetails />
 
         <Button activeOpacity={.8} onPress={() => navigation.navigate("DailyForecast")}>
           <Title color="#fff">Ver previsão diária</Title>
