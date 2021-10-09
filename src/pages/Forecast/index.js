@@ -19,7 +19,7 @@ import HourlyCard from '../../components/HourlyCard';
 import ConditionsDetails from '../../components/ConditionsDetails';
 import SunDetails from '../../components/SunDetails';
 
-export default function Home({ navigation }) {
+export default function Forecast({ navigation }) {
   return (
     <Container>
       {/* <Header>
