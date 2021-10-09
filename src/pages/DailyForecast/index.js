@@ -40,15 +40,17 @@ export default function DailyForecast() {
       >
         {dataIndex >=1 &&
         <Button color="transparent" left 
-          onPress={() => dataIndex>=0 ? setDataIndex(dataIndex-1) : dataIndex}
+          onPress={() => dataIndex>=0?setDataIndex(dataIndex-1):dataIndex}
         >
           <MaterialCommunityIcons name="arrow-left-drop-circle" size={24} color="#49577a" />
+          <Text size="12px">04/10</Text>
         </Button>}
         {dataIndex < data.length-1 &&
         <Button color="transparent" right 
-          onPress={() => dataIndex<=data.length-1 ? setDataIndex(dataIndex+1) : dataIndex}
+          onPress={() => dataIndex<=data.length-1?setDataIndex(dataIndex+1):dataIndex}
         >
           <MaterialCommunityIcons name="arrow-right-drop-circle" size={24} color="#49577a" />
+          <Text size="12px">06/10</Text>
         </Button>}
       </Div>
 

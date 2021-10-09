@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../pages/Home';
 import HourlyForecast from '../pages/HourlyForecast';
 import DailyForecast from '../pages/DailyForecast';
+import Search from '../pages/Search';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,6 +14,13 @@ export default function Router() {
       <Tab.Screen 
         name="Home" 
         component={Home} 
+        options={{
+          headerShown: false
+        }}
+      />
+      <Tab.Screen 
+        name="Search" 
+        component={Search} 
         options={{
           headerShown: false
         }}
