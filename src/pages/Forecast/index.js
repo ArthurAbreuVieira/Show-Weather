@@ -42,7 +42,7 @@ export default function Forecast({ navigation }) {
         <SunDetails />
 
         <Button activeOpacity={.8} onPress={() => navigation.navigate("DailyForecast")}>
-          <Title color="#fff">Ver previsão diária</Title>
+          <Title color="#fff" style={{top: -9}}>Ver previsão diária</Title>
         </Button>
 
       </Section>

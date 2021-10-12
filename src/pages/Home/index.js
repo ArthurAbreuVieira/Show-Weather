@@ -34,7 +34,7 @@ export default function Home({ navigation }) {
         <Text color="#fff" size="15px">Segunda-Feira, 04/10</Text>
       </Div>
 
-      <Div>
+      <Div style={{marginTop: 50}}>
         <Card>
           <Title color="#666">Sua localização</Title>
           <Text numberOfLines={1} color="#888">Belo Horizonte, Brasil</Text>

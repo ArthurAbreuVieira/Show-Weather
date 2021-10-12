@@ -11,7 +11,7 @@ export const Container = styled.SafeAreaView`
 export const Input = styled.TextInput`
   width: 80%;
   height: 50px;
-  margin: 40px 0;
+  margin: 20px 0;
   border-radius: 5px;
   background-color: #ddd;
   padding: 0 12px;
@@ -39,7 +39,7 @@ export const Text = styled.Text`
 export const List = styled.FlatList`
   background-color: #fff;
   width: 100%;
-  height: 71%;
+  height: 75%;
 `;
 
 export const Div = styled.View`

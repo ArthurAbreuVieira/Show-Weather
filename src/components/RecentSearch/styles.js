@@ -4,7 +4,7 @@ export const Container = styled.TouchableOpacity`
   width: 345px;
   justify-content: center;
   align-items: center;
-  background-color: #ebebeb;
+  background-color: #242cffaa;
   border-radius: 20px;
   margin-bottom: 10px;
 `;
@@ -52,6 +52,19 @@ export const Div = styled.View`
   position: ${({ position }) => position || 'relative'};
   z-index: ${({ hover }) => hover && 10 || 0};
   top: 0;
+`;
+
+export const HalfBG = styled.View`
+  background-color: ${({ color }) => color || '#bbb'};
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: ${({ tlr }) => tlr || 0};
+  border-top-right-radius: ${({ trr }) => trr || 0};
+  border-bottom-left-radius: ${({ blr }) => blr || 0};
+  border-bottom-right-radius: ${({ brr }) => brr || 0};
+  position: absolute;
+  top: ${({ position }) => position==="top"?0:'50%'};
+  z-index: -1;
 `;
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//

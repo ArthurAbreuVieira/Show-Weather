@@ -23,13 +23,13 @@ export const Section = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding-top: 30px;
 `;
 
 export const Title = styled.Text`
   color: ${({ color }) => color || '#000'};;
   font-size: 25px;
   font-weight: bold;
-  margin-bottom: 15px;
 `;
 
 export const Row = styled.View`

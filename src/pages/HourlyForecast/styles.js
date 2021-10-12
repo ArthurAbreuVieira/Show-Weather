@@ -4,20 +4,21 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
-  background-color: #ebebeb;
+  
+  background-color: #fff;
   /* margin-top: 50px; */
 `;
 
 export const List = styled.FlatList`
   background-color: #fff;
   width: 100%;
-  padding-top: 50px;
+  padding-top: 10px;
 `;
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 
 export const Title = styled.Text`
-  color: ${({ color }) => color || '#000'};;
+  color: ${({ color }) => color || '#000'};
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 15px;

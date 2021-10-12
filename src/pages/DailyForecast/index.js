@@ -24,10 +24,6 @@ export default function DailyForecast() {
   const data = [0,1,2,3,4,5,6];
   const [dataIndex, setDataIndex] = useState(0);
 
-  useEffect(()=>{
-    // alert(dataIndex);
-  }, [dataIndex]);
-
   return (
     <Container>
       <Div 
@@ -67,7 +63,7 @@ export default function DailyForecast() {
 
         <Div>
           <Title>Sensação termica</Title>
-          <Row >
+          <Row>
             <RowItem>
               <Text>Diurna</Text>
               <Text color="#aaa" >25°</Text>
