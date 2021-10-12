@@ -6,6 +6,7 @@ import HourlyForecast from '../pages/HourlyForecast';
 import DailyForecast from '../pages/DailyForecast';
 
 import TabRouter from './TabRouter';
+import ForecastRouter from './ForecastRouter';
 
 const Stack = createStackNavigator();
 
@@ -20,63 +21,23 @@ export default function StackRouter() {
         }}
       />
       <Stack.Screen 
-        name="Forecast" 
-        component={Forecast} 
+        name="ForecastRouter" 
+        component={ForecastRouter} 
         options={{
-          headerStyle: {
-            backgroundColor: '#ededed',
-            elevation: 10,
-          },
-          title: "Forecast",
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: '#777',
-            textAlign: 'center',
-            fontWeight: 'bold',
-            paddingTop: 25,
-            paddingBottom: 25
-          }
-          // headerShown: false
-        }}
-      />
-      <Stack.Screen 
-        name="HourlyForecast" 
-        component={HourlyForecast} 
-        options={{
-          headerStyle: {
-            backgroundColor: '#ededed',
-            elevation: 10,
-          },
-          title: "Hourly Forecast",
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: '#777',
-            textAlign: 'center',
-            fontWeight: 'bold',
-            paddingTop: 25,
-            paddingBottom: 25
-          }
-          // headerShown: false
-        }}
-      />
-      <Stack.Screen 
-        name="DailyForecast" 
-        component={DailyForecast} 
-        options={{
-          headerStyle: {
-            backgroundColor: '#ededed',
-            elevation: 10,
-          },
-          title: "Daily Forecast",
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: '#777',
-            textAlign: 'center',
-            fontWeight: 'bold',
-            paddingTop: 25,
-            paddingBottom: 25
-          }
-          // headerShown: false
+          // headerStyle: {
+          //   backgroundColor: '#ededed',
+          //   elevation: 10,
+          // },
+          // title: "Forecast",
+          // headerTitleAlign: 'center',
+          // headerTitleStyle: {
+          //   color: '#777',
+          //   textAlign: 'center',
+          //   fontWeight: 'bold',
+          //   paddingTop: 25,
+          //   paddingBottom: 25
+          // }
+          headerShown: false
         }}
       />
     </Stack.Navigator>

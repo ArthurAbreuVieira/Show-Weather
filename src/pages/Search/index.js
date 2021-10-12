@@ -62,7 +62,7 @@ export default function Search({ navigation }) {
     <Container>
       <Div direction="row" justify="space-evenly">
         <Input autoCapitalize="words"/>
-        <SearchButton onPress={() => navigation.navigate("Forecast")}>
+        <SearchButton onPress={() => navigation.navigate("ForecastRouter")}>
           <FontAwesome5 name="search" size={24} color="#fff" />
         </SearchButton>
       </Div>
