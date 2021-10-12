@@ -2,12 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import Router from './src/routes/router';
+import TabRouter from './src/routes/TabRouter';
+import StackRouter from './src/routes/StackRouter';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Router />
+      <StackRouter />
     </NavigationContainer>
   );
 }

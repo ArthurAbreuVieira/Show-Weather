@@ -30,7 +30,7 @@ export default function Home({ navigation }) {
         <Title>Bem Vindo</Title>
       </Header> */}
 
-      <Div color="#7700ff" style={{paddingTop: 12}}>
+      <Div color="#70f" style={{paddingTop: 12}}>
         <Text color="#fff" size="15px">Segunda-Feira, 04/10</Text>
       </Div>
 
