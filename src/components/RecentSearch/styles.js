@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
-  width: 345px;
+  width: ${({ screenWidth }) => (screenWidth*96/100)+'px'};
   justify-content: center;
   align-items: center;
   background-color: #242cffaa;

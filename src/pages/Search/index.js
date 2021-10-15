@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { Dimensions } from 'react-native';
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
@@ -69,13 +69,15 @@ export default function Search({ navigation }) {
 
       <Div justify="flex-start">
         <Title align="left" fullWidth >Pesquisas recentes</Title>
-          <List 
-            contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center'}}
-            showsVerticalScrollIndicator={false}
-            data={fakeData}
-            keyExtractor={(item, index) => String(index)}
-            renderItem={({ item }) => <RecentSearch />}
-          />
+        <List 
+          contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center'}}
+          showsVerticalScrollIndicator={false}
+          data={fakeData}
+          keyExtractor={(item, index) => String(index)}
+          renderItem={({ item }) => (
+            <RecentSearch screenWidth={Dimensions.get('window').width}/>
+          )}
+        />
       </Div>
     </Container>
   );

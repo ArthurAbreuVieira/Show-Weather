@@ -84,7 +84,9 @@ export default function HourlyForecast() {
       <List
         contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
         data={fakeData}
-        renderItem={({ item }) => (<ListItem text={item.title}/>)}
+        renderItem={({ item }) => (
+          <ListItem text={item.title} screenWidth={Dimensions.get('window').width}/>
+        )}
         keyExtractor={(item, index) => String(index)}
       />
     </Container>

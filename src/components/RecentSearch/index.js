@@ -18,14 +18,16 @@ import {
   HalfBG,
 } from './styles'
 
-export default function ListItem({ text }) {
+export default function RecentSearch({ text, screenWidth }) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <Container>
+    <Container screenWidth={screenWidth}>
       <HalfBG
         color="#ededed"
         tlr="300px"
+        trr="20px"
+        blr="20px"
         brr="300px"
         position="top"
       />

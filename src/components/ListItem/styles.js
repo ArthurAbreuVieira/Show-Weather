@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
-  width: 345px;
+  width: ${({ screenWidth }) => (screenWidth*95/100)+'px'};
   justify-content: center;
   align-items: center;
   background-color: #ebebeb;

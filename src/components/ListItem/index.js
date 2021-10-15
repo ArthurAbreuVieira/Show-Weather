@@ -16,11 +16,11 @@ import {
   Button,
 } from './styles'
 
-export default function ListItem({ text }) {
+export default function ListItem({ text, screenWidth }) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <Container>
+    <Container screenWidth={screenWidth}>
       <MainRow>
         <ListItemHour />
         <Title>28°</Title>
