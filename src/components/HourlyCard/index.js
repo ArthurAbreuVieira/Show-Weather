@@ -14,7 +14,7 @@ import {
   Row,
 } from './styles';
 
-export default function HourlyCard({ navigation }) {
+export default function HourlyCard({ navigation, data }) {
   return (
     <Container>
       <Row>
@@ -36,7 +36,7 @@ export default function HourlyCard({ navigation }) {
           <Content>
             <Hour>10:00</Hour>
             <Feather name="cloud-rain" size={40} color="#fff" />
-            <Temperature>20°</Temperature>
+            <Temperature>{data.hourly !== undefined ? data.hourly[0].temp : data.temp.morn}°</Temperature>
           </Content>
         </Card>
         <Card color="#b46490" activeOpacity={.7} onPress={() => navigation.navigate("HourlyForecast")}>
@@ -49,7 +49,7 @@ export default function HourlyCard({ navigation }) {
           <Content>
             <Hour>18:00</Hour>
             <Ionicons name="sunny-sharp" size={40} color="#fff" />
-            <Temperature>19°</Temperature>
+            <Temperature>{data.hourly !== undefined ? data.hourly[1].temp : data.temp.day}°</Temperature>
           </Content>
         </Card>
         <Card color="#2f4858" activeOpacity={.7} onPress={() => navigation.navigate("HourlyForecast")}>
@@ -63,7 +63,7 @@ export default function HourlyCard({ navigation }) {
           <Content>
             <Hour>22:00</Hour>
             <FontAwesome5 name="moon" size={40} color="#fff" />
-            <Temperature>5°</Temperature>
+            <Temperature>{data.hourly !== undefined ? data.hourly[2].temp : data.temp.night}°</Temperature>
           </Content>
         </Card>
 

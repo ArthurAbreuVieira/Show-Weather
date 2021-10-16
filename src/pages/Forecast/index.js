@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -19,27 +19,37 @@ import HourlyCard from '../../components/HourlyCard';
 import ConditionsDetails from '../../components/ConditionsDetails';
 import SunDetails from '../../components/SunDetails';
 
-export default function Forecast({ navigation }) {
+export default function Forecast({ navigation, route }) {
+  const { data } = route.params;
+  const days = {
+    today: data,
+    tomorrow: data.daily[0],
+    after: data.daily[1]
+  }
+  const [dataOfDay, setDataOfDay] = useState(days.today);
+  const [selectedDay, setSelectedDay] = useState('today');
+
+  useEffect(() => {
+    setDataOfDay(days[selectedDay]);
+  }, [selectedDay]);
+
   return (
     <Container>
-      {/* <Header>
-        <Title>Bem Vindo</Title>
-      </Header> */}
-      <QuickInfo color="#ededed"/>
-      <SelectDay />
+      <QuickInfo color="#ededed" data={dataOfDay}/>
+      <SelectDay handleDay={setSelectedDay}/>
 
       <ScrollView 
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
       >
 
-      <HourlyCard navigation={navigation} />
+      <HourlyCard navigation={navigation} data={dataOfDay}/>
       
       <Section>
         <Title>Details</Title>
 
-        <ConditionsDetails />
-        <SunDetails />
+        <ConditionsDetails data={dataOfDay}/>
+        <SunDetails data={data.current}/>
 
         <Button activeOpacity={.8} onPress={() => navigation.navigate("DailyForecast")}>
           <Title color="#fff" style={{top: -9}}>Ver previsão diária</Title>
