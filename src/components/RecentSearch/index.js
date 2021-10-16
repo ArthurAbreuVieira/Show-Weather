@@ -24,12 +24,12 @@ export default function RecentSearch({ text, screenWidth }) {
   return (
     <Container screenWidth={screenWidth}>
       <HalfBG
-        color="#ededed"
-        tlr="300px"
-        trr="20px"
-        blr="20px"
-        brr="300px"
-        position="top"
+        color="#cbcbcb"
+        tlr="600px"
+        trr="600px"
+        blr="30px"
+        brr="30px"
+        position="bottom"
       />
       <Div direction="row" width="80%" height="80px" justify="space-evenly" color="transparent">
         <Ionicons name="sunny-sharp" size={40} color="#ffa53b" style={{top: 3}}/>

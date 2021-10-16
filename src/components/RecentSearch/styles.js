@@ -4,8 +4,10 @@ export const Container = styled.TouchableOpacity`
   width: ${({ screenWidth }) => (screenWidth*96/100)+'px'};
   justify-content: center;
   align-items: center;
-  background-color: #242cffaa;
-  border-radius: 20px;
+  /* background-color: #242cffaa; */
+  background-color: #ededed;
+  border: 2px solid #4aaaff;
+  border-radius: 10px;
   margin-bottom: 10px;
 `;
 
@@ -56,14 +58,16 @@ export const Div = styled.View`
 
 export const HalfBG = styled.View`
   background-color: ${({ color }) => color || '#bbb'};
-  width: 100%;
-  height: 100%;
+  width: 98%;
+  height: 44%;
   border-top-left-radius: ${({ tlr }) => tlr || 0};
   border-top-right-radius: ${({ trr }) => trr || 0};
   border-bottom-left-radius: ${({ blr }) => blr || 0};
   border-bottom-right-radius: ${({ brr }) => brr || 0};
+  border: 2px solid #888;
+  border-bottom-width: 0px;
   position: absolute;
-  top: ${({ position }) => position==="top"?0:'50%'};
+  bottom: ${({ position }) => position==="bottom"?0:'50%'};
   z-index: -1;
 `;
 
