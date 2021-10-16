@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
 
+import convertTimestamp from '../../util/convertTimestamp';
+
 import {
   Container,
   Float,
@@ -10,11 +12,13 @@ import {
 } from './styles';
 
 export default function QuickInfo({ color, data }) {
+  const date = convertTimestamp(1634367023);
+
   return (
     <Container color={color}>
       <Ionicons name="sunny-sharp" size={45} color="#ffa53b" />
       <Float>{data.current?.temp !== undefined ? data.current.temp : data.temp.day}°</Float>
-      <Date>Segunda-Feira | 05/10</Date>
+      <Date>{date.dayOfWeek} | {date.date}</Date>
       <Location>Belo Horizonte, Brazil</Location>
     </Container>
   );
