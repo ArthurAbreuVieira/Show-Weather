@@ -1,6 +1,8 @@
 import React from 'react';
 import { Dimensions } from 'react-native'
 
+import { AntDesign, Ionicons } from '@expo/vector-icons';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from '../pages/Home';
@@ -10,7 +12,20 @@ const Tab = createBottomTabNavigator();
 
 export default function TabRouter() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: {
+          backgroundColor: '#ededed',
+        },
+        tabBarActiveTintColor: '#4aaaff',
+        tabBarInactiveTintColor: '#555',
+        tabBarLabelStyle: {
+          fontSize: 13
+        },
+      }}
+    >
       <Tab.Screen 
         name="Home" 
         component={Home} 
@@ -27,8 +42,9 @@ export default function TabRouter() {
             fontWeight: 'bold',
             paddingTop: 25,
             paddingBottom: 25
-          }
+          },
           // headerShown: false
+          tabBarIcon: ({ focused }) => <Ionicons name={focused?'home':'ios-home-outline'} size={24} color={focused?'#4aaaff':'#888'} />
         }}
       />
       <Tab.Screen 
@@ -47,7 +63,8 @@ export default function TabRouter() {
             fontWeight: 'bold',
             paddingTop: 25,
             paddingBottom: 25
-          }
+          },
+          tabBarIcon: ({ focused }) => <AntDesign name="search1" size={24} color={focused?'#4aaaff':'#888'} />
           // headerShown: false
         }}
       />
