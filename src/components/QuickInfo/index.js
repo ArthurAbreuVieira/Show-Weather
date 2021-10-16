@@ -9,11 +9,11 @@ import {
   Location
 } from './styles';
 
-export default function QuickInfo({ color }) {
+export default function QuickInfo({ color, data }) {
   return (
     <Container color={color}>
       <Ionicons name="sunny-sharp" size={45} color="#ffa53b" />
-      <Float>31,9°</Float>
+      <Float>{data.temp}°</Float>
       <Date>Segunda-Feira | 05/10</Date>
       <Location>Belo Horizonte, Brazil</Location>
     </Container>

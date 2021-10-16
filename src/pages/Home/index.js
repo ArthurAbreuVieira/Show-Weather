@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView } from 'react-native';
 
+import * as Location from 'expo-location';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 import {
@@ -24,6 +25,32 @@ import ConditionsDetails from '../../components/ConditionsDetails';
 import SunDetails from '../../components/SunDetails';
 
 export default function Home({ navigation }) {
+  async function getLocation() {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      return {error: "Permission denied!"};
+    }
+  
+    let location = await Location.getCurrentPositionAsync({});
+    return location;
+  }
+
+  const [location, setLocation] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      return {error: "Permission denied!"};
+    }
+  
+    const location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+    console.log(location);
+  })();
+  }, []);
+
+
   return (
     <Container>
       {/* <Header>

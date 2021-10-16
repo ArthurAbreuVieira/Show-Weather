@@ -11,7 +11,9 @@ import DailyForecast from '../pages/DailyForecast';
 
 const Tab = createBottomTabNavigator();
 
-export default function ForecastRouter() {
+export default function ForecastRouter({ route }) {
+  const { data } = route.params;
+
   return (
     <Tab.Navigator
       initialRouteName="Forecast"
@@ -46,6 +48,9 @@ export default function ForecastRouter() {
           },
           // headerShown: false
           tabBarIcon: ({ focused }) => <AntDesign name={focused?'cloud':'cloudo'} size={24} color={focused?'#4aaaff':'#888'} />
+        }}
+        initialParams={{
+          data,
         }}
       />
       <Tab.Screen 
