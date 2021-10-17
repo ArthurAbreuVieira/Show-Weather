@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
-import getCityCoords from '../../util/getCityCoords';
+import getCityData from '../../util/getCityData';
 import fetchWeatherContent from '../../util/fetchWeatherContent';
  
 import RecentSearch from '../../components/RecentSearch';
@@ -29,7 +29,8 @@ export default function Search({ navigation }) {
 
   async function search(city) {
     setLoading(true);
-    let coords = await getCityCoords(city);
+    const cityData = await getCityData(city);
+    const coords = cityData.coord;
 
     const data = await fetchWeatherContent(coords.lat, coords.lon);
     // console.log(data);
@@ -45,7 +46,7 @@ export default function Search({ navigation }) {
       }
       // await AsyncStorage.setItem('@history', JSON.stringify([]));
       setLoading(false);
-      navigation.navigate("ForecastRouter", {data: JSON.stringify(data)});
+      navigation.navigate("ForecastRouter", {data: JSON.stringify(data), location: `${cityData.name}, ${cityData.sys.country}`});
     }
   }
 

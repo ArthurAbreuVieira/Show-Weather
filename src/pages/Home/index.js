@@ -6,6 +6,7 @@ import * as Location from 'expo-location';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 import fetchWeatherContent from '../../util/fetchWeatherContent';
+import convertTimestamp from '../../util/convertTimestamp';
 
 import {
   Container,
@@ -28,11 +29,16 @@ import ConditionsDetails from '../../components/ConditionsDetails';
 import SunDetails from '../../components/SunDetails';
 
 import LoadingModal from '../../components/LoadingModal';
+import getIcon from '../../util/getIcon';
 
 export default function Home({ navigation }) {
   const [location, setLocation] = useState({});
   const [weatherData, setWeatherData] = useState(undefined);
   const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState(undefined);
+  const [temp, setTemp] = useState(undefined);
+  const [icon, setIcon] = useState(undefined);
+  const [dayOfWeek, setDayOfWeek] = useState(undefined);
 
   useEffect(() => {
     (async () => {
@@ -40,13 +46,21 @@ export default function Home({ navigation }) {
       if (status !== 'granted') {
         return {error: "Permission denied!"};
       }
-    
+
       const location = await Location.getCurrentPositionAsync({});
       setLocation(location);
+
+      let cityData = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=2d1071d2a640b454a941894654415839`);
+      cityData = await cityData.json();
+      setCity(`${cityData.name}, ${cityData.sys.country}`);
+      const date = convertTimestamp(cityData.dt);
+      setDayOfWeek(date.dayOfWeek + ", " + date.date);
 
       const data = await fetchWeatherContent(location.coords.latitude, location.coords.longitude);
       await AsyncStorage.setItem('@weather_data', JSON.stringify(data));
       setWeatherData(data);
+      setTemp(Math.round(data.current.temp));
+      setIcon(getIcon(data.current.weather[0].id, data.dt, 40));
     })();
 
   }, []);
@@ -57,19 +71,20 @@ export default function Home({ navigation }) {
       <LoadingModal visible={loading} />
 
       <Div color="#70f" style={{paddingTop: 12}}>
-        <Text color="#fff" size="15px">Segunda-Feira, 04/10</Text>
+        <Text color="#fff" size="15px">{dayOfWeek}</Text>
       </Div>
 
       <Div style={{marginTop: 50}}>
         <Card>
           <Title color="#666">Sua localização</Title>
-          {weatherData === undefined ?
+          {weatherData===undefined&&city===undefined&&temp===undefined&&temp===undefined 
+            ?
             <ActivityIndicator size="large" color="#4ac0ff"/>
             : <>
-          <Text numberOfLines={1} color="#888">Belo Horizonte, Brasil</Text>
+          <Text numberOfLines={1} color="#888">{city}</Text>
           <Div color="transparent" direction="row" justify="space-around" width="40%">
-            <Text numberOfLines={1} size="30px" color="#888">36°</Text>
-            <Ionicons name="sunny-sharp" size={30} color="#ffa53b" style={{ top: -5 }} />
+            <Text numberOfLines={1} size="30px" color="#888" style={{top: 6}}>{temp}°</Text>
+            {icon}
           </Div>
           <Button onPress={() => {
             setLoading(true);

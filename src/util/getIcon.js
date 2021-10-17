@@ -19,7 +19,7 @@ export default function getIcon(id, date, size, color) {
     if(Number.parseInt(convertTimestamp(date).hour) >= 5 && Number.parseInt(convertTimestamp(date).hour) <= 17) {
       return <Ionicons name="ios-sunny" size={size} color={color||"#ffa53b"} />
     } else {
-      return <Ionicons name="md-moon" size={size} color={color||"#4asize88"} />
+      return <Ionicons name="md-moon" size={size} color={color||"#4a4088"} />
     }
   } else if(id == '801') {
     if(Number.parseInt(convertTimestamp(date).hour) >= 5 && Number.parseInt(convertTimestamp(date).hour) <= 17) {
