@@ -11,14 +11,14 @@ import {
   Location
 } from './styles';
 
-export default function QuickInfo({ color, data }) {
-  const date = convertTimestamp(1634367023);
+export default function QuickInfo({ color, data, date }) {
+  const formatedDate = date.date;
 
   return (
     <Container color={color}>
       <Ionicons name="sunny-sharp" size={45} color="#ffa53b" />
-      <Float>{data.current?.temp !== undefined ? data.current.temp : data.temp.day}°</Float>
-      <Date>{date.dayOfWeek} | {date.date}</Date>
+      <Float>{data.hasOwnProperty("current") ? data.current.temp : data.temp.day}°</Float>
+      <Date>{date.dayOfWeek} | {formatedDate}</Date>
       <Location>Belo Horizonte, Brazil</Location>
     </Container>
   );

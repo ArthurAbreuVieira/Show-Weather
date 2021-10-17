@@ -36,7 +36,7 @@ export default function HourlyCard({ navigation, data }) {
           <Content>
             <Hour>10:00</Hour>
             <Feather name="cloud-rain" size={40} color="#fff" />
-            <Temperature>{data.hourly !== undefined ? data.hourly[0].temp : data.temp.morn}°</Temperature>
+            <Temperature>{data.hasOwnProperty("hourly") ? data.hourly[0].temp : data.temp.morn}°</Temperature>
           </Content>
         </Card>
         <Card color="#b46490" activeOpacity={.7} onPress={() => navigation.navigate("HourlyForecast")}>
@@ -49,7 +49,7 @@ export default function HourlyCard({ navigation, data }) {
           <Content>
             <Hour>18:00</Hour>
             <Ionicons name="sunny-sharp" size={40} color="#fff" />
-            <Temperature>{data.hourly !== undefined ? data.hourly[1].temp : data.temp.day}°</Temperature>
+            <Temperature>{data.hasOwnProperty("hourly") ? data.hourly[1].temp : data.temp.day}°</Temperature>
           </Content>
         </Card>
         <Card color="#2f4858" activeOpacity={.7} onPress={() => navigation.navigate("HourlyForecast")}>
@@ -63,7 +63,7 @@ export default function HourlyCard({ navigation, data }) {
           <Content>
             <Hour>22:00</Hour>
             <FontAwesome5 name="moon" size={40} color="#fff" />
-            <Temperature>{data.hourly !== undefined ? data.hourly[2].temp : data.temp.night}°</Temperature>
+            <Temperature>{data.hasOwnProperty("hourly") ? data.hourly[2].temp : data.temp.night}°</Temperature>
           </Content>
         </Card>
 

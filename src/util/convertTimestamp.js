@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from "moment-timezone";
 
 export default function convertTimestamp(timestamp) {
   const days = [
@@ -35,21 +35,20 @@ export default function convertTimestamp(timestamp) {
   const date = moment.unix(timestamp).utc();
 
   const dateInfo = {
-    day: date.format("D"),
-    month: date.format("M"),
-    year: date.format("YYYY"),
-    date: date.format("D/M"),
-    hour: date.format("HH:mm"),
-    dayOfWeek: date.format("dddd"),
+    day: date.tz("America/Sao_Paulo").format("D"),
+    month: date.tz("America/Sao_Paulo").format("M"),
+    year: date.tz("America/Sao_Paulo").format("YYYY"),
+    date: date.tz("America/Sao_Paulo").format("D/M"),
+    hour: date.tz("America/Sao_Paulo").format("HH:mm"),
+    dayOfWeek: date.tz("America/Sao_Paulo").format("dddd"),
   };
 
   for(day of days) {
-    if(day.en === date.format("dddd")) {
+    if(day.en === date.tz("America/Sao_Paulo").format("dddd")) {
       dateInfo.dayOfWeek = day.pt;
       break;
     }
   }
-
-  console.log(dateInfo.dayOfWeek);
+  
   return dateInfo;
 }

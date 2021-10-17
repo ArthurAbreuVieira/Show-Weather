@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+
+import convertTimestamp from '../../util/convertTimestamp';
 
 import {
   Container,
@@ -20,22 +23,32 @@ import ConditionsDetails from '../../components/ConditionsDetails';
 import SunDetails from '../../components/SunDetails';
 
 export default function Forecast({ navigation, route }) {
-  const { data } = route.params;
+  let { data } = route.params;
+  
+  data = JSON.parse(data);
+
   const days = {
-    today: data,
-    tomorrow: data.daily[0],
-    after: data.daily[1]
-  }
-  const [dataOfDay, setDataOfDay] = useState(days.today);
+    today: data._W,
+    tomorrow: data._W.daily[0],
+    after: data._W.daily[1]
+  };
+
+  const [date, setDate] = useState(convertTimestamp(days.today.current.dt));
+  const [dataOfDay, setDataOfDay] = useState(days.tomorrow);
   const [selectedDay, setSelectedDay] = useState('today');
 
   useEffect(() => {
     setDataOfDay(days[selectedDay]);
+    if(selectedDay === "today") {
+      setDate(convertTimestamp(days.today.current.dt));
+    } else {
+      setDate(convertTimestamp(days[selectedDay].dt));
+    }
   }, [selectedDay]);
 
   return (
     <Container>
-      <QuickInfo color="#ededed" data={dataOfDay}/>
+      <QuickInfo color="#ededed" data={dataOfDay} date={date}/>
       <SelectDay handleDay={setSelectedDay}/>
 
       <ScrollView 
@@ -49,7 +62,7 @@ export default function Forecast({ navigation, route }) {
         <Title>Details</Title>
 
         <ConditionsDetails data={dataOfDay}/>
-        <SunDetails data={data.current}/>
+        <SunDetails data={dataOfDay}/>
 
         <Button activeOpacity={.8} onPress={() => navigation.navigate("DailyForecast")}>
           <Title color="#fff" style={{top: -9}}>Ver previsão diária</Title>
