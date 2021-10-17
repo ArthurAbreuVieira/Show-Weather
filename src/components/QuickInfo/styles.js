@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.View`
   width: 100%;
-  height: 200px;
+  height: 210px;
   justify-content: center;
   align-items: center;
   background-color: ${({ color }) => color || 'transparent'};

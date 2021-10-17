@@ -24,7 +24,7 @@ export default function ListItem({ data, screenWidth }) {
   return (
     <Container screenWidth={screenWidth}>
       <MainRow>
-        <ListItemHour date={convertTimestamp(data.dt)}/>
+        <ListItemHour weather={data.weather[0].id} date={convertTimestamp(data.dt)}/>
         <Title>{Math.round(data.temp)}°</Title>
         <Button onPress={() => setShowDetails(!showDetails)}>
           <Text color="#fff">Ver detalhes</Text>

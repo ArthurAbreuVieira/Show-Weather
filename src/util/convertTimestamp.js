@@ -43,7 +43,9 @@ export default function convertTimestamp(timestamp, operation) {
     year: date.tz("America/Sao_Paulo").format("YYYY"),
     date: date.tz("America/Sao_Paulo").format("D/M"),
     hour: date.tz("America/Sao_Paulo").format("HH:mm"),
+    single_hour: date.tz("America/Sao_Paulo").format("H"), 
     dayOfWeek: date.tz("America/Sao_Paulo").format("dddd"),
+    timestamp: date.unix()
   };
 
   for(day of days) {
