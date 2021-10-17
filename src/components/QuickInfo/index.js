@@ -13,8 +13,10 @@ import {
   Location,
 } from './styles';
 
-export default function QuickInfo({ color, data, date }) {
+export default function QuickInfo({ color, data, date, location }) {
   const formatedDate = date.date;
+
+  console.log(location);
 
   const temperature = data.hasOwnProperty("current") ? Math.round(data.current.temp) : Math.round(data.temp.day);
 
@@ -26,7 +28,7 @@ export default function QuickInfo({ color, data, date }) {
       {getIcon(data.weather[0].id, data.dt, 55)}
       <Temperature>{temperature}°</Temperature>
       <Date>{date.dayOfWeek} | {formatedDate}</Date>
-      <Location>Belo Horizonte, Brazil</Location>
+      <Location>{location}</Location>
     </Container>
   );
 }

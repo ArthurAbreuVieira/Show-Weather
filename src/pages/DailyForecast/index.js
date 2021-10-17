@@ -39,7 +39,7 @@ export default function DailyForecast({ route }) {
     }
   }  
 
-  let { data } = route.params;
+  let { data, location } = route.params;
   
   data = JSON.parse(data).daily;
 
@@ -82,7 +82,7 @@ export default function DailyForecast({ route }) {
         </Button>}
       </Div>
 
-      <QuickInfo color="#ededed" data={currentData} date={convertTimestamp(currentData.dt)} />
+      <QuickInfo color="#ededed" data={currentData} date={convertTimestamp(currentData.dt)} location={location}/>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}

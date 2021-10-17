@@ -23,8 +23,10 @@ import ConditionsDetails from '../../components/ConditionsDetails';
 import SunDetails from '../../components/SunDetails';
 
 export default function Forecast({ navigation, route }) {
-  let { data } = route.params;
+  let { data, location } = route.params;
   
+  console.log(location);
+
   data = JSON.parse(data);
 
   const days = {
@@ -48,7 +50,7 @@ export default function Forecast({ navigation, route }) {
 
   return (
     <Container>
-      <QuickInfo color="#ededed" data={dataOfDay} date={date}/>
+      <QuickInfo color="#ededed" data={dataOfDay} date={date} location={location}/>
       <SelectDay handleDay={setSelectedDay}/>
 
       <ScrollView 

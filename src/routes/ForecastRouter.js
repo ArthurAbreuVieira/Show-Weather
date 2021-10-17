@@ -12,7 +12,7 @@ import DailyForecast from '../pages/DailyForecast';
 const Tab = createBottomTabNavigator();
 
 export default function ForecastRouter({ route }) {
-  const { data } = route.params;
+  const { data, location } = route.params;
 
   return (
     <Tab.Navigator
@@ -50,6 +50,7 @@ export default function ForecastRouter({ route }) {
         }}
         initialParams={{
           data,
+          location
         }}
       />
       <Tab.Screen 
@@ -73,6 +74,7 @@ export default function ForecastRouter({ route }) {
         }}
         initialParams={{
           data,
+          location
         }}
       />
       <Tab.Screen 
@@ -96,6 +98,7 @@ export default function ForecastRouter({ route }) {
         }}
         initialParams={{
           data,
+          location
         }}
       />
     </Tab.Navigator>

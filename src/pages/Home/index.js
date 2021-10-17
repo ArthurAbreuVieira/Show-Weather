@@ -88,7 +88,7 @@ export default function Home({ navigation }) {
           </Div>
           <Button onPress={() => {
             setLoading(true);
-            navigation.navigate("ForecastRouter", {data: JSON.stringify(weatherData)});
+            navigation.navigate("ForecastRouter", {data: JSON.stringify(weatherData), location: city});
             setLoading(false);
           }}>
             <Text color="#fff">Ver previsão do tempo</Text>
