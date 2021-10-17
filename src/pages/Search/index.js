@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dimensions } from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import getCityCoords from '../../util/getCityCoords';
 import fetchWeatherContent from '../../util/fetchWeatherContent';
-
+ 
 import RecentSearch from '../../components/RecentSearch';
 
 import {
@@ -24,56 +26,32 @@ import {
 export default function Search({ navigation }) {
   async function search(city) {
     let coords = await getCityCoords(city);
-    console.log(coords);
 
     const data = await fetchWeatherContent(coords.lat, coords.lon);
     // console.log(data);
     if(data) {
-      console.log(data);
+      let historyData = JSON.parse(await AsyncStorage.getItem('@history')) || [];
+      const hasCity = historyData.some(item => item.city === city);
+      if(!hasCity) {
+        historyData.unshift({
+          city,
+          coords
+        });
+        await AsyncStorage.setItem('@history', JSON.stringify(historyData));
+      }
+      // await AsyncStorage.setItem('@history', JSON.stringify([]));
       navigation.navigate("ForecastRouter", {data: JSON.stringify(data)});
     }
   }
 
   const [inputValue, setInputValue] = useState('');
+  const [history, setHistory] = useState([]);
 
-  const fakeData = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-  ];
+  useEffect(() => {
+    (async()=>{
+      setHistory(JSON.parse(await AsyncStorage.getItem('@history')));
+    })();
+  }, [history]);
 
   return (
     <Container>
@@ -81,7 +59,7 @@ export default function Search({ navigation }) {
         <Input autoCapitalize="words" value={inputValue} 
           onChangeText={text => setInputValue(text)}
         />
-        <SearchButton onPress={() => search(inputValue)}>
+        <SearchButton onPress={async() => await search(inputValue)}>
           <FontAwesome5 name="search" size={24} color="#fff" />
         </SearchButton>
       </Div>
@@ -91,10 +69,15 @@ export default function Search({ navigation }) {
         <List 
           contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center'}}
           showsVerticalScrollIndicator={false}
-          data={fakeData}
+          data={history}
           keyExtractor={(item, index) => String(index)}
           renderItem={({ item }) => (
-            <RecentSearch screenWidth={Dimensions.get('window').width}/>
+            <RecentSearch 
+              city={item.city}
+              coords={item.coords}
+              search={() => search(item.city)}
+              screenWidth={Dimensions.get('window').width}
+            />
           )}
         />
       </Div>

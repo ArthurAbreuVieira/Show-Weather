@@ -16,13 +16,13 @@ export default function getIcon(id, date, size, color) {
   } else if(String(id).startsWith('7')) {
     return <MaterialCommunityIcons name="weather-fog" size={size} color={color||"#666"} />
   } else if(id == '800') {
-    if(Number.parseInt(convertTimestamp(date).single_hour) >= 5 && Number.parseInt(convertTimestamp(date).single_hour) <= '17') {
+    if(Number.parseInt(convertTimestamp(date).hour) >= 5 && Number.parseInt(convertTimestamp(date).hour) <= 17) {
       return <Ionicons name="ios-sunny" size={size} color={color||"#ffa53b"} />
     } else {
       return <Ionicons name="md-moon" size={size} color={color||"#4asize88"} />
     }
   } else if(id == '801') {
-    if(Number.parseInt(convertTimestamp(date).single_hour) >= 5 || Number.parseInt(convertTimestamp(date).single_hour) <= '17') {
+    if(Number.parseInt(convertTimestamp(date).hour) >= 5 && Number.parseInt(convertTimestamp(date).hour) <= 17) {
       return <MaterialCommunityIcons name="weather-partly-cloudy" size={size} color={color||"#666"} />
     } else {
       return <MaterialCommunityIcons name="weather-night-partly-cloudy" size={size} color={color||"#666"} />
