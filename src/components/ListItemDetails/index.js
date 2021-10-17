@@ -16,15 +16,16 @@ import {
 
 } from './styles'
 
-export default function ListItemDetails({ text }) {
+export default function ListItemDetails({ data }) {
+  const description = data.weather[0].description;
+
   return (
     <Container>
-      <ConditionsDetails color="#ededed"/>
+      <ConditionsDetails color="#ededed" data={data}/>
 
       <Row card style={{top: -20}}>
         <RowItem column large >
-          <Title>Nublado</Title>
-          <Text>Poucas nuvens</Text>
+          <Text>{description.charAt(0).toUpperCase()+description.substr(1, description.length-1)}</Text>
         </RowItem>
       </Row>
     </Container>

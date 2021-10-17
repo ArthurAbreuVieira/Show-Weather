@@ -8,11 +8,11 @@ import {
   Title,
 } from './styles'
 
-export default function ListItemHour({ text }) {
+export default function ListItemHour({ date }) {
   return (
     <Container>
       <Ionicons name="sunny-sharp" size={35} color="#ffa53b" />
-      <Title>20:00</Title>
+      <Title>{date.hour}</Title>
     </Container>
   );
 }

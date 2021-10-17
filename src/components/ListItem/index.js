@@ -3,6 +3,8 @@ import { ScrollView } from 'react-native';
 
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 
+import convertTimestamp from '../../util/convertTimestamp';
+
 import ListItemHour from '../ListItemHour';
 import ListItemDetails from '../ListItemDetails';
 
@@ -16,14 +18,14 @@ import {
   Button,
 } from './styles'
 
-export default function ListItem({ text, screenWidth }) {
+export default function ListItem({ data, screenWidth }) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
     <Container screenWidth={screenWidth}>
       <MainRow>
-        <ListItemHour />
-        <Title>28°</Title>
+        <ListItemHour date={convertTimestamp(data.dt)}/>
+        <Title>{data.temp}°</Title>
         <Button onPress={() => setShowDetails(!showDetails)}>
           <Text color="#fff">Ver detalhes</Text>
           <MaterialIcons style={{top: -5}} name="arrow-drop-down" size={25} color="#fff" />
@@ -31,7 +33,7 @@ export default function ListItem({ text, screenWidth }) {
       </MainRow>
 
       { showDetails &&
-      <ListItemDetails /> }
+      <ListItemDetails data={data}/> }
     </Container>
   );
 }

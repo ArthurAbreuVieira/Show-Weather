@@ -16,7 +16,7 @@ export default function ForecastRouter({ route }) {
 
   return (
     <Tab.Navigator
-      initialRouteName="Forecast"
+      initialRouteName="HourlyForecast"
       screenOptions={{
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
@@ -46,7 +46,6 @@ export default function ForecastRouter({ route }) {
             paddingTop: 25,
             paddingBottom: 25
           },
-          // headerShown: false
           tabBarIcon: ({ focused }) => <AntDesign name={focused?'cloud':'cloudo'} size={24} color={focused?'#4aaaff':'#888'} />
         }}
         initialParams={{
@@ -72,6 +71,9 @@ export default function ForecastRouter({ route }) {
           },
           tabBarIcon: ({ focused }) => <AntDesign name={focused?'clockcircle':'clockcircleo'} size={24} color={focused?'#4aaaff':'#888'} />
         }}
+        initialParams={{
+          data,
+        }}
       />
       <Tab.Screen 
         name="DailyForecast" 
@@ -91,6 +93,9 @@ export default function ForecastRouter({ route }) {
             paddingBottom: 25
           },
           tabBarIcon: ({ focused }) => <Ionicons name={focused?'md-today':'md-today-sharp'} size={24} color={focused?'#4aaaff':'#888'} />
+        }}
+        initialParams={{
+          data,
         }}
       />
     </Tab.Navigator>

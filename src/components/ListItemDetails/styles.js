@@ -11,13 +11,13 @@ export const Container = styled.SafeAreaView`
 
 export const Text = styled.Text`
   color: ${({ color }) => color || '#000'};
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 `;
 
 export const Title = styled.Text`
   color: ${({ color }) => color || '#000'};;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
 `;
 
