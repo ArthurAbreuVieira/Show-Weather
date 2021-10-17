@@ -6,7 +6,7 @@ import convertTimestamp from '../../util/convertTimestamp';
 
 import {
   Container,
-  Float,
+  Temperature,
   Date,
   Location
 } from './styles';
@@ -17,7 +17,7 @@ export default function QuickInfo({ color, data, date }) {
   return (
     <Container color={color}>
       <Ionicons name="sunny-sharp" size={45} color="#ffa53b" />
-      <Float>{data.hasOwnProperty("current") ? data.current.temp : data.temp.day}°</Float>
+      <Temperature>{data.hasOwnProperty("current") ? Math.round(data.current.temp) : Math.round(data.temp.day)}°</Temperature>
       <Date>{date.dayOfWeek} | {formatedDate}</Date>
       <Location>Belo Horizonte, Brazil</Location>
     </Container>

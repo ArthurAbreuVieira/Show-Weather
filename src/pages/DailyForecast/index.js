@@ -98,11 +98,11 @@ export default function DailyForecast({ route }) {
           <Row>
             <RowItem>
               <Text>Diurna</Text>
-              <Text color="#aaa" >{currentData.feels_like.day}°</Text>
+              <Text color="#aaa" >{Math.round(currentData.feels_like.day)}°</Text>
             </RowItem>
             <RowItem>
               <Text>Noturna</Text>
-              <Text color="#aaa" >{currentData.feels_like.eve}°</Text>
+              <Text color="#aaa" >{Math.round(currentData.feels_like.eve)}°</Text>
             </RowItem>
           </Row>
         </Div>

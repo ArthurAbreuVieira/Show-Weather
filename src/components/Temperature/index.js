@@ -18,7 +18,7 @@ export default function Temperature({ data }) {
           <Text>Temperatura minima</Text>
           <Card width="">
             <FontAwesome5 name="temperature-low" size={35} color="#00a2ff" style={{ top: -5 }} />
-            <Text color="#888" size="30px" >{data.min}°</Text>
+            <Text color="#888" size="30px" >{Math.round(data.min)}°</Text>
           </Card>
         </Card>
 
@@ -26,7 +26,7 @@ export default function Temperature({ data }) {
           <Text>Temperatura maxima</Text>
           <Card width="">
             <FontAwesome5 name="temperature-high" size={35} color="orangered" style={{ top: -5 }} />
-            <Text color="#888" size="30px" >{data.max}°</Text>
+            <Text color="#888" size="30px" >{Math.round(data.max)}°</Text>
           </Card>
         </Card>
       </RowItem>

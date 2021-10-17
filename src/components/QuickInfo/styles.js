@@ -10,7 +10,7 @@ export const Container = styled.View`
   border-bottom-right-radius: 50px;
 `;
 
-export const Float = styled.Text`
+export const Temperature = styled.Text`
   font-size: 55px;
   color: #000;
   font-weight: 700;

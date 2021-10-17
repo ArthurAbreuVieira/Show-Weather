@@ -25,7 +25,7 @@ export default function ListItem({ data, screenWidth }) {
     <Container screenWidth={screenWidth}>
       <MainRow>
         <ListItemHour date={convertTimestamp(data.dt)}/>
-        <Title>{data.temp}°</Title>
+        <Title>{Math.round(data.temp)}°</Title>
         <Button onPress={() => setShowDetails(!showDetails)}>
           <Text color="#fff">Ver detalhes</Text>
           <MaterialIcons style={{top: -5}} name="arrow-drop-down" size={25} color="#fff" />
