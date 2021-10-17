@@ -28,8 +28,8 @@ export default function ConditionsDetails({ navigation, color, data }) {
 
       <Row color={color}>
         <RowItem>
-          <Text>Visibility</Text>
-          <Text color="#aaa" >{data.hasOwnProperty("current") ? data.current.visibility : data.visibility} km</Text>
+          <Text>Nublado</Text>
+          <Text color="#aaa" >{data.hasOwnProperty("current") ? data.current.clouds : data.clouds}%</Text>
         </RowItem>
         <RowItem>
           <Text>UV</Text>

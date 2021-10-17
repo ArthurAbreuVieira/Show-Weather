@@ -17,7 +17,7 @@ import {
   Row,
 } from './styles';
 
-export default function HourlyCard({ navigation, data }) {
+export default function HourlyCard({ navigation, data, showCards }) {
   const hourly = {
     _10: {
       temp: undefined,
@@ -64,6 +64,7 @@ export default function HourlyCard({ navigation, data }) {
 
   return (
     <Container>
+      {showCards &&
       <Row>
         <HalfBG
           color="#ededed"
@@ -116,7 +117,7 @@ export default function HourlyCard({ navigation, data }) {
           </Content>
         </Card>
 
-      </Row>
+      </Row>}
       <Row buttonRow>
         <Button activeOpacity={.8} onPress={() => navigation.navigate("HourlyForecast")} color="#e16f7b">
           <Text color="#fff">Ver previsão horaria</Text>

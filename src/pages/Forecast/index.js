@@ -56,7 +56,7 @@ export default function Forecast({ navigation, route }) {
         contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
       >
 
-      <HourlyCard navigation={navigation} data={dataOfDay}/>
+      <HourlyCard navigation={navigation} data={dataOfDay} showCards={selectedDay==="today"?true:false}/>
       
       <Section>
         <Title>Details</Title>
