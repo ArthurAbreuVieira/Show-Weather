@@ -9,6 +9,7 @@ import getCityCoords from '../../util/getCityCoords';
 import fetchWeatherContent from '../../util/fetchWeatherContent';
  
 import RecentSearch from '../../components/RecentSearch';
+import LoadingModal from '../../components/LoadingModal';
 
 import {
   Container,
@@ -24,7 +25,10 @@ import {
 } from './styles';
 
 export default function Search({ navigation }) {
+  const [loading, setLoading] = useState(false);
+
   async function search(city) {
+    setLoading(true);
     let coords = await getCityCoords(city);
 
     const data = await fetchWeatherContent(coords.lat, coords.lon);
@@ -40,6 +44,7 @@ export default function Search({ navigation }) {
         await AsyncStorage.setItem('@history', JSON.stringify(historyData));
       }
       // await AsyncStorage.setItem('@history', JSON.stringify([]));
+      setLoading(false);
       navigation.navigate("ForecastRouter", {data: JSON.stringify(data)});
     }
   }
@@ -49,12 +54,14 @@ export default function Search({ navigation }) {
 
   useEffect(() => {
     (async()=>{
-      setHistory(JSON.parse(await AsyncStorage.getItem('@history')));
+      setHistory(JSON.parse(await AsyncStorage.getItem('@history')) || []);
     })();
   }, [history]);
 
   return (
     <Container>
+      <LoadingModal visible={loading} />
+
       <Div direction="row" justify="space-evenly">
         <Input autoCapitalize="words" value={inputValue} 
           onChangeText={text => setInputValue(text)}

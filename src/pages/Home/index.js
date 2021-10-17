@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, ScrollView } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
@@ -27,9 +27,12 @@ import HourlyCard from '../../components/HourlyCard';
 import ConditionsDetails from '../../components/ConditionsDetails';
 import SunDetails from '../../components/SunDetails';
 
+import LoadingModal from '../../components/LoadingModal';
+
 export default function Home({ navigation }) {
   const [location, setLocation] = useState({});
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -51,9 +54,7 @@ export default function Home({ navigation }) {
 
   return (
     <Container>
-      {/* <Header>
-        <Title>Bem Vindo</Title>
-      </Header> */}
+      <LoadingModal visible={loading} />
 
       <Div color="#70f" style={{paddingTop: 12}}>
         <Text color="#fff" size="15px">Segunda-Feira, 04/10</Text>
@@ -62,21 +63,29 @@ export default function Home({ navigation }) {
       <Div style={{marginTop: 50}}>
         <Card>
           <Title color="#666">Sua localização</Title>
+          {weatherData === undefined ?
+            <ActivityIndicator size="large" color="#4ac0ff"/>
+            : <>
           <Text numberOfLines={1} color="#888">Belo Horizonte, Brasil</Text>
           <Div color="transparent" direction="row" justify="space-around" width="40%">
             <Text numberOfLines={1} size="30px" color="#888">36°</Text>
             <Ionicons name="sunny-sharp" size={30} color="#ffa53b" style={{ top: -5 }} />
           </Div>
-          <Button onPress={() => navigation.navigate("ForecastRouter", {data: JSON.stringify(weatherData)})}>
+          <Button onPress={() => {
+            setLoading(true);
+            navigation.navigate("ForecastRouter", {data: JSON.stringify(weatherData)});
+            setLoading(false);
+          }}>
             <Text color="#fff">Ver previsão do tempo</Text>
             <AntDesign name="arrowright" size={30} color="#fff" style={{ top: -5 }} />
           </Button>
+          </>}
         </Card>
 
         <Text color="#888">OU</Text>
 
         <Card>
-          <Button>
+          <Button onPress={() => navigation.navigate("Search")}>
             <Text color="#fff">Pesquisar por uma cidade</Text>
             <AntDesign name="search1" size={25} color="#fff" style={{ top: -5 }} />
           </Button>
