@@ -3,6 +3,8 @@ import { ScrollView } from 'react-native';
 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
+import convertTimestamp from '../../util/convertTimestamp';
+
 import QuickInfo from '../../components/QuickInfo'
 import ConditionsDetails from '../../components/ConditionsDetails'
 import SunDetails from '../../components/SunDetails'
@@ -20,9 +22,35 @@ import {
   Button,
 } from './styles'
 
-export default function DailyForecast() {
-  const data = [0,1,2,3,4,5,6];
+export default function DailyForecast({ route }) {
+  function changeDataOfDay(page) {
+    if(page === "previous") {
+      if(dataIndex <= 0) return;
+      setCurrentData(data[dataIndex-1]);
+      setDataIndex(dataIndex-1);
+      setPreviousDate(convertTimestamp(data[dataIndex-1].dt, "subtract_day"));
+      setNextDate(convertTimestamp(data[dataIndex-1].dt, "add_day"));
+    }else if(page === "next") {
+      if(dataIndex >= data.length-1) return;
+      setCurrentData(data[dataIndex+1]);
+      setDataIndex(dataIndex+1);
+      setPreviousDate(convertTimestamp(data[dataIndex+1].dt, "subtract_day"));
+      setNextDate(convertTimestamp(data[dataIndex+1].dt, "add_day"));
+    }
+  }  
+
+  let { data } = route.params;
+  
+  data = JSON.parse(data)._W.daily;
+
+  const [currentData, setCurrentData] = useState(data[0]);
   const [dataIndex, setDataIndex] = useState(0);
+  const [previousDate, setPreviousDate] = useState(convertTimestamp(currentData.dt, "subtract_day"));
+  const [nextDate, setNextDate] = useState(convertTimestamp(currentData.dt, "add_day"));
+  
+  console.log(currentData);
+
+  const description = currentData.weather[0].description;
 
   return (
     <Container>
@@ -36,48 +64,52 @@ export default function DailyForecast() {
       >
         {dataIndex >=1 &&
         <Button color="transparent" left 
-          onPress={() => dataIndex>=0?setDataIndex(dataIndex-1):dataIndex}
+          onPress={() => {
+            changeDataOfDay("previous");
+          }}
         >
           <MaterialCommunityIcons name="arrow-left-drop-circle" size={24} color="#49577a" />
-          <Text size="12px">04/10</Text>
+          <Text size="12px">{previousDate.date}</Text>
         </Button>}
         {dataIndex < data.length-1 &&
         <Button color="transparent" right 
-          onPress={() => dataIndex<=data.length-1?setDataIndex(dataIndex+1):dataIndex}
+          onPress={() => {
+            changeDataOfDay("next");
+          }}
         >
           <MaterialCommunityIcons name="arrow-right-drop-circle" size={24} color="#49577a" />
-          <Text size="12px">06/10</Text>
+          <Text size="12px">{nextDate.date}</Text>
         </Button>}
       </Div>
 
-      <QuickInfo color="#ededed" />
+      <QuickInfo color="#ededed" data={currentData} date={convertTimestamp(currentData.dt)} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
       >
         <Row style={{justifyContent: 'center',marginTop: 5}}>
-            <Text>Poucas nuvens</Text>
+            <Text>{description.charAt(0).toUpperCase()+description.substr(1, description.length-1)}</Text>
         </Row>
 
-        <ConditionsDetails />
+        <ConditionsDetails data={currentData}/>
 
         <Div>
           <Title>Sensação termica</Title>
           <Row>
             <RowItem>
               <Text>Diurna</Text>
-              <Text color="#aaa" >25°</Text>
+              <Text color="#aaa" >{currentData.feels_like.day}°</Text>
             </RowItem>
             <RowItem>
               <Text>Noturna</Text>
-              <Text color="#aaa" >10°</Text>
+              <Text color="#aaa" >{currentData.feels_like.eve}°</Text>
             </RowItem>
           </Row>
         </Div>
 
-        <Temperature />
-        <SunDetails />
-        <MoonDetails />
+        <Temperature data={currentData.temp}/>
+        <SunDetails data={currentData}/>
+        <MoonDetails data={currentData}/>
       </ScrollView>
     </Container>
   );

@@ -1,6 +1,6 @@
 import moment from "moment-timezone";
 
-export default function convertTimestamp(timestamp) {
+export default function convertTimestamp(timestamp, operation) {
   const days = [
     {
       en: "Sunday",
@@ -33,6 +33,9 @@ export default function convertTimestamp(timestamp) {
   ];
 
   const date = moment.unix(timestamp).utc();
+
+  if(operation === "add_day") date.add(1, 'days');
+  else if(operation === "subtract_day") date.subtract(1, 'days');
 
   const dateInfo = {
     day: date.tz("America/Sao_Paulo").format("D"),

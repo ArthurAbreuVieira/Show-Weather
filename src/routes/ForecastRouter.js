@@ -16,7 +16,7 @@ export default function ForecastRouter({ route }) {
 
   return (
     <Tab.Navigator
-      initialRouteName="HourlyForecast"
+      initialRouteName="DailyForecast"
       screenOptions={{
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
