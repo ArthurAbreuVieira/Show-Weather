@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
 
 import { FontAwesome5 } from '@expo/vector-icons';
+
+import getCityCoords from '../../util/getCityCoords';
+import fetchWeatherContent from '../../util/fetchWeatherContent';
 
 import RecentSearch from '../../components/RecentSearch';
 
@@ -19,6 +22,20 @@ import {
 } from './styles';
 
 export default function Search({ navigation }) {
+  async function search(city) {
+    let coords = await getCityCoords(city);
+    console.log(coords);
+
+    const data = await fetchWeatherContent(coords.lat, coords.lon);
+    // console.log(data);
+    if(data) {
+      console.log(data);
+      navigation.navigate("ForecastRouter", {data: JSON.stringify(data)});
+    }
+  }
+
+  const [inputValue, setInputValue] = useState('');
+
   const fakeData = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -61,8 +78,10 @@ export default function Search({ navigation }) {
   return (
     <Container>
       <Div direction="row" justify="space-evenly">
-        <Input autoCapitalize="words"/>
-        <SearchButton onPress={() => navigation.navigate("ForecastRouter")}>
+        <Input autoCapitalize="words" value={inputValue} 
+          onChangeText={text => setInputValue(text)}
+        />
+        <SearchButton onPress={() => search(inputValue)}>
           <FontAwesome5 name="search" size={24} color="#fff" />
         </SearchButton>
       </Div>

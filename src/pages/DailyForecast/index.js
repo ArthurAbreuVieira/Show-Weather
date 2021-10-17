@@ -41,7 +41,7 @@ export default function DailyForecast({ route }) {
 
   let { data } = route.params;
   
-  data = JSON.parse(data)._W.daily;
+  data = JSON.parse(data).daily;
 
   const [currentData, setCurrentData] = useState(data[0]);
   const [dataIndex, setDataIndex] = useState(0);

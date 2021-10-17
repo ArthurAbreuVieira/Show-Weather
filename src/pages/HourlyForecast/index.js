@@ -20,7 +20,7 @@ import {
 export default function HourlyForecast({ route }) {
   let { data } = route.params;
   
-  data = JSON.parse(data)._W.hourly;
+  data = JSON.parse(data).hourly;
   
   const dailyData = [];
 

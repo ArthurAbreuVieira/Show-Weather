@@ -41,7 +41,7 @@ export default function Home({ navigation }) {
       const location = await Location.getCurrentPositionAsync({});
       setLocation(location);
 
-      const data = fetchWeatherContent(location.coords.latitude, location.coords.longitude);
+      const data = await fetchWeatherContent(location.coords.latitude, location.coords.longitude);
       await AsyncStorage.setItem('@weather_data', JSON.stringify(data));
       setWeatherData(data);
     })();

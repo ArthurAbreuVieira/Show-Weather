@@ -28,9 +28,9 @@ export default function Forecast({ navigation, route }) {
   data = JSON.parse(data);
 
   const days = {
-    today: data._W,
-    tomorrow: data._W.daily[1],
-    after: data._W.daily[2]
+    today: data,
+    tomorrow: data.daily[1],
+    after: data.daily[2]
   };
 
   const [date, setDate] = useState(convertTimestamp(days.today.current.dt));
