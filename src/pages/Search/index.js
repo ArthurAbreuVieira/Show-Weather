@@ -21,6 +21,7 @@ import {
   RowItem,
   Button,
   SearchButton,
+  ClearButton,
   Div,
 } from './styles';
 import SearchError from '../../components/SearchError';
@@ -30,6 +31,11 @@ export default function Search({ navigation }) {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [lastAttempt, setLastAttempt] = useState('');
+
+  async function clearHistory() {
+    setLoading(true);
+    return await AsyncStorage.setItem('@history', JSON.stringify([]));
+  }
 
   async function search(city) {
     if(city === '') return;
@@ -83,7 +89,6 @@ export default function Search({ navigation }) {
         });
         await AsyncStorage.setItem('@history', JSON.stringify(historyData));
       }
-      // await AsyncStorage.setItem('@history', JSON.stringify([]));
       setLoading(false);
       setError(false);
       setErrorMessage("");
@@ -117,7 +122,15 @@ export default function Search({ navigation }) {
       </Div>
 
       <Div justify="flex-start">
-        <Title align="left" fullWidth >Pesquisas recentes</Title>
+        <Div justify="space-evenly" direction="row" width="86.5%">
+          <Title align="left" fullWidth >Pesquisas recentes</Title>
+          <ClearButton onPress={async () => {
+            await clearHistory();
+            setLoading(false);
+          }}>
+            <FontAwesome5 name="trash-alt" size={24} color="#f00" />
+          </ClearButton>
+        </Div>
         <List 
           contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center'}}
           showsVerticalScrollIndicator={false}

@@ -99,3 +99,13 @@ export const SearchButton = styled.TouchableOpacity`
   height: 50px;
 `;
 
+export const ClearButton = styled.TouchableOpacity`
+  background-color: ${({ color }) => color || '#fff'};
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  top: -5px;
+`;
+
