@@ -57,11 +57,11 @@ export default function Forecast({ navigation, route }) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
       >
-
-      <HourlyCard navigation={navigation} data={dataOfDay} showCards={selectedDay==="today"?true:false}/>
+      {selectedDay==="today" &&
+      <HourlyCard navigation={navigation} data={dataOfDay}/>}
       
       <Section>
-        <Title>Details</Title>
+        <Title>Detalhes</Title>
 
         <ConditionsDetails data={dataOfDay}/>
         <SunDetails data={dataOfDay}/>

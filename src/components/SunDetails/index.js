@@ -25,7 +25,7 @@ export default function SunDetails({ navigation, color, data }) {
           <Text color="#888" >{sunRise}</Text>
         </RowItem>
         <RowItem column center >
-          <Text>Por do sol</Text>
+          <Text>Pôr do sol</Text>
           <MaterialCommunityIcons name="weather-sunset" size={30} color="orangered" />
           <Text color="#888" >{sunSet}</Text>
         </RowItem>

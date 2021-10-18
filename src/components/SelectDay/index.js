@@ -15,19 +15,19 @@ export default function SelectDay({ handleDay }) {
         setFocus('today');
         handleDay("today");
       }}>
-        <OptionText focused={focus==='today'?true:false} >Today</OptionText>
+        <OptionText focused={focus==='today'?true:false} >Hoje</OptionText>
       </Option>
       <Option activeOpacity={.7} onPress={()=>{
         setFocus('tomorrow');
         handleDay("tomorrow");
       }}>
-        <OptionText focused={focus==='tomorrow'?true:false} >Tomorrow</OptionText>
+        <OptionText focused={focus==='tomorrow'?true:false} >Amanhã</OptionText>
       </Option>
       <Option activeOpacity={.7} onPress={()=>{
         setFocus('after');
         handleDay("after");
     }}>
-        <OptionText focused={focus==='after'?true:false} >After</OptionText>
+        <OptionText focused={focus==='after'?true:false} >Depois</OptionText>
       </Option>
     </Container>
   );

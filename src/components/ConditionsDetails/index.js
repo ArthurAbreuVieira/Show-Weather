@@ -17,11 +17,11 @@ export default function ConditionsDetails({ navigation, color, data }) {
     <Container>
       <Row color={color}>
         <RowItem>
-          <Text>Wind</Text>
-          <Text color="#aaa" >{data.hasOwnProperty("current") ? data.current.wind_speed : data.wind_speed} m/h</Text>
+          <Text>Vento</Text>
+          <Text color="#aaa" >{data.hasOwnProperty("current") ? (data.current.wind_speed*3.6).toFixed(1) : (data.wind_speed*3.6).toFixed(1)} k/m</Text>
         </RowItem>
         <RowItem>
-          <Text>Humidity</Text>
+          <Text>Umidade</Text>
           <Text color="#aaa" >{data.hasOwnProperty("current") ? data.current.humidity : data.humidity}%</Text>
         </RowItem>
       </Row>

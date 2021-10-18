@@ -43,10 +43,14 @@ export const RowItem = styled.View`
 `;
 
 export const Text = styled.Text`
-  color: ${({ color }) => color || '#000'};
+  color: ${({ color }) => color || '#777'};
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 15px;
+  padding: 0 0 20px 0;
+  background-color: #ededed;
+  width: 100%;
+  text-align: center;
+  /* border-bottom: 2px solid #888; */
 `;
 
 export const Button = styled.TouchableOpacity`

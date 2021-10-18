@@ -128,9 +128,11 @@ export default function Search({ navigation }) {
             await clearHistory();
             setLoading(false);
           }}>
-            <FontAwesome5 name="trash-alt" size={24} color="#f00" />
+            {history.length > 0 &&
+            <FontAwesome5 name="trash-alt" size={24} color="#f00" />}
           </ClearButton>
         </Div>
+        {history.length > 0 ?
         <List 
           contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center'}}
           showsVerticalScrollIndicator={false}
@@ -144,7 +146,10 @@ export default function Search({ navigation }) {
               screenWidth={Dimensions.get('window').width}
             />
           )}
-        />
+        /> : 
+        <Div justify="center" direction="row" width="100%" height="70%">
+          <Text color="#888">Você não tem pesquisas no histórico</Text>
+        </Div>}
       </Div>
     </Container>
   );

@@ -60,7 +60,7 @@ export default function ForecastRouter({ route }) {
         options={{
           headerStyle: {
             backgroundColor: '#ededed',
-            elevation: 10,
+            elevation: 0,
           },
           title: "Previsão por Hora",
           headerTitleAlign: 'center',

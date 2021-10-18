@@ -22,6 +22,8 @@ export default function HourlyForecast({ route }) {
   
   data = JSON.parse(data).hourly;
   
+  const date = convertTimestamp(data[0].dt);
+
   const dailyData = [];
 
   data.forEach(day => {
@@ -35,6 +37,12 @@ export default function HourlyForecast({ route }) {
 
   return (
     <Container>
+      <Text
+        style={{
+          borderBottomWidth: 2,
+          borderBottomColor: "#888"
+        }}
+      >{`${date.dayOfWeek}, ${date.date}`}</Text>
       <List
         contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
         data={dailyData}
