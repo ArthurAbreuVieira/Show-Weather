@@ -46,6 +46,7 @@ export default function Home({ navigation }) {
   async function getInitialData() {
     const location = await Location.getCurrentPositionAsync({});
     setLocation(location);
+    console.log(location);
 
     let cityData;
     try {
@@ -62,13 +63,12 @@ export default function Home({ navigation }) {
     }
 
     setCity(`${cityData.name}, ${cityData.sys.country}`);
-    const date = convertTimestamp(cityData.dt);
+    const date = convertTimestamp(location.timestamp/1000);
     setDayOfWeek(date.dayOfWeek + ", " + date.date);
 
     let data;
     try {
       data = await fetchWeatherContent(location.coords.latitude, location.coords.longitude);
-      console.log(data);
       await AsyncStorage.setItem('@weather_data', JSON.stringify(data));
     } catch (error) {
       setError(true);
@@ -81,7 +81,7 @@ export default function Home({ navigation }) {
     }
 
     setWeatherData(data);
-    console.log(data);
+    // console.log(data);
     setTemp(Math.round(data.current.temp));
     setIcon(getIcon(data.current.weather[0].id, data.dt, 40));
 
@@ -118,7 +118,10 @@ export default function Home({ navigation }) {
       <LoadingModal visible={loading} />
 
       <Div color="#70f" style={{ paddingTop: 12 }}>
-        <Text color="#fff" size="15px">{dayOfWeek}</Text>
+      {dayOfWeek === undefined ? 
+        <ActivityIndicator size="large" color="#fff" style={{ top: -5 }}/>
+      :
+        <Text color="#fff" size="15px">{dayOfWeek}</Text>}
       </Div>
 
       <Div style={{ marginTop: 50 }}>
@@ -129,7 +132,7 @@ export default function Home({ navigation }) {
             <Title color="#666">Sua localização</Title>
             {loadingCard
               ?
-              <ActivityIndicator size="large" color="#4ac0ff" />
+              <ActivityIndicator size="large" color="#4ac0ff"/>
               : <>
                 <Text numberOfLines={1} color="#888">{city}</Text>
                 <Div color="transparent" direction="row" justify="space-around" width="40%">

@@ -23,18 +23,54 @@ import {
   SearchButton,
   Div,
 } from './styles';
+import SearchError from '../../components/SearchError';
 
 export default function Search({ navigation }) {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [lastAttempt, setLastAttempt] = useState('');
 
   async function search(city) {
     if(city === '') return;
-
+    setLastAttempt(city);
+    setError(false);
     setLoading(true);
-    const cityData = await getCityData(city);
+    setErrorMessage("");
+    let cityData;
+    try {
+      cityData = await getCityData(city);
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+      setErrorMessage("Erro ao obter dados da pesquisa");
+      return;
+    }
+
+    if(cityData.cod == 404) {
+      setLoading(false);
+      setError(true);
+      setErrorMessage("Cidade não encontrada")
+      return;
+    }
+
     const coords = cityData.coord;
 
-    const data = await fetchWeatherContent(coords.lat, coords.lon);
+    let data;
+    try {
+      data = await fetchWeatherContent(coords.lat, coords.lon);
+    } catch (error) {
+      setError(true);
+      setErrorMessage("Erro ao obter dados da pesquisa");
+    }
+
+    if(data.cod && data.message) {
+      setLoading(false);
+      setError(true);
+      setErrorMessage("Erro ao obter dados da pesquisa");
+      return;
+    }
+
     // console.log(data);
     if(data) {
       let historyData = JSON.parse(await AsyncStorage.getItem('@history')) || [];
@@ -49,6 +85,8 @@ export default function Search({ navigation }) {
       }
       // await AsyncStorage.setItem('@history', JSON.stringify([]));
       setLoading(false);
+      setError(false);
+      setErrorMessage("");
       navigation.navigate("ForecastRouter", {data: JSON.stringify(data), location: `${cityData.name}, ${cityData.sys.country}`});
     }
   }
@@ -65,6 +103,9 @@ export default function Search({ navigation }) {
   return (
     <Container>
       <LoadingModal visible={loading} />
+      <SearchError message={errorMessage} visible={error} setVisible={setError}
+        reload={()=>search(lastAttempt)}
+      />
 
       <Div direction="row" justify="space-evenly">
         <Input autoCapitalize="words" value={inputValue} 
