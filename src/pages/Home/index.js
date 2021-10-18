@@ -30,39 +30,86 @@ import SunDetails from '../../components/SunDetails';
 
 import LoadingModal from '../../components/LoadingModal';
 import getIcon from '../../util/getIcon';
+import CardError from '../../components/CardError';
 
 export default function Home({ navigation }) {
   const [location, setLocation] = useState({});
   const [weatherData, setWeatherData] = useState(undefined);
   const [loading, setLoading] = useState(false);
+  const [loadingCard, setLoadingCard] = useState(true);
   const [city, setCity] = useState(undefined);
   const [temp, setTemp] = useState(undefined);
   const [icon, setIcon] = useState(undefined);
   const [dayOfWeek, setDayOfWeek] = useState(undefined);
+  const [error, setError] = useState(false);
+
+  async function getInitialData() {
+    const location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+
+    let cityData;
+    try {
+      cityData = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=2d1071d2a640b454a941894654415839`);
+      cityData = await cityData.json();
+    } catch (error) {
+      setError(true);
+      return;
+    }
+
+    if(cityData.cod && cityData.message) {
+      setError(true);
+      return;
+    }
+
+    setCity(`${cityData.name}, ${cityData.sys.country}`);
+    const date = convertTimestamp(cityData.dt);
+    setDayOfWeek(date.dayOfWeek + ", " + date.date);
+
+    let data;
+    try {
+      data = await fetchWeatherContent(location.coords.latitude, location.coords.longitude);
+      console.log(data);
+      await AsyncStorage.setItem('@weather_data', JSON.stringify(data));
+    } catch (error) {
+      setError(true);
+      return;
+    }
+    
+    if(data.cod && data.message) {
+      setError(true);
+      return;
+    }
+
+    setWeatherData(data);
+    console.log(data);
+    setTemp(Math.round(data.current.temp));
+    setIcon(getIcon(data.current.weather[0].id, data.dt, 40));
+
+    setLoadingCard(false);
+  }
+
+  async function requestLocationPermission() {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setError(true);
+    }
+  }
+
+  async function bootstrap()  {
+    setLoadingCard(true);
+    setError(false);
+    setWeatherData(undefined);
+    setCity(undefined);
+    setTemp(undefined);
+    setIcon(undefined);
+
+    await requestLocationPermission();
+
+    await getInitialData();
+  }
 
   useEffect(() => {
-    (async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        return {error: "Permission denied!"};
-      }
-
-      const location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-
-      let cityData = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=2d1071d2a640b454a941894654415839`);
-      cityData = await cityData.json();
-      setCity(`${cityData.name}, ${cityData.sys.country}`);
-      const date = convertTimestamp(cityData.dt);
-      setDayOfWeek(date.dayOfWeek + ", " + date.date);
-
-      const data = await fetchWeatherContent(location.coords.latitude, location.coords.longitude);
-      await AsyncStorage.setItem('@weather_data', JSON.stringify(data));
-      setWeatherData(data);
-      setTemp(Math.round(data.current.temp));
-      setIcon(getIcon(data.current.weather[0].id, data.dt, 40));
-    })();
-
+    bootstrap();
   }, []);
 
 
@@ -70,32 +117,35 @@ export default function Home({ navigation }) {
     <Container>
       <LoadingModal visible={loading} />
 
-      <Div color="#70f" style={{paddingTop: 12}}>
+      <Div color="#70f" style={{ paddingTop: 12 }}>
         <Text color="#fff" size="15px">{dayOfWeek}</Text>
       </Div>
 
-      <Div style={{marginTop: 50}}>
-        <Card>
-          <Title color="#666">Sua localização</Title>
-          {weatherData===undefined&&city===undefined&&temp===undefined&&temp===undefined 
-            ?
-            <ActivityIndicator size="large" color="#4ac0ff"/>
-            : <>
-          <Text numberOfLines={1} color="#888">{city}</Text>
-          <Div color="transparent" direction="row" justify="space-around" width="40%">
-            <Text numberOfLines={1} size="30px" color="#888" style={{top: 6}}>{temp}°</Text>
-            {icon}
-          </Div>
-          <Button onPress={() => {
-            setLoading(true);
-            navigation.navigate("ForecastRouter", {data: JSON.stringify(weatherData), location: city});
-            setLoading(false);
-          }}>
-            <Text color="#fff">Ver previsão do tempo</Text>
-            <AntDesign name="arrowright" size={30} color="#fff" style={{ top: -5 }} />
-          </Button>
-          </>}
-        </Card>
+      <Div style={{ marginTop: 50 }}>
+        {error ?
+          <CardError reload={bootstrap}/>
+          :
+          <Card height="200px">
+            <Title color="#666">Sua localização</Title>
+            {loadingCard
+              ?
+              <ActivityIndicator size="large" color="#4ac0ff" />
+              : <>
+                <Text numberOfLines={1} color="#888">{city}</Text>
+                <Div color="transparent" direction="row" justify="space-around" width="40%">
+                  <Text numberOfLines={1} size="30px" color="#888" style={{ top: 6 }}>{temp}°</Text>
+                  {icon}
+                </Div>
+                <Button onPress={() => {
+                  setLoading(true);
+                  navigation.navigate("ForecastRouter", { data: JSON.stringify(weatherData), location: city });
+                  setLoading(false);
+                }}>
+                  <Text color="#fff">Ver previsão do tempo</Text>
+                  <AntDesign name="arrowright" size={30} color="#fff" style={{ top: -5 }} />
+                </Button>
+              </>}
+          </Card>}
 
         <Text color="#888">OU</Text>
 

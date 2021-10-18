@@ -9,7 +9,7 @@ export const Container = styled.SafeAreaView`
 
 export const Card = styled.View`
   width: 90%;
-  ${({ height }) => `height: ${height};`}
+  /* height: 250px; */
   justify-content: space-around;
   align-items: center;
   border-radius: 10px;
@@ -54,6 +54,7 @@ export const Title = styled.Text`
   color: ${({ color }) => color || '#000'};;
   font-size: 25px;
   font-weight: bold;
+  text-align: center;
 `;
 
 export const Text = styled.Text`
@@ -61,10 +62,14 @@ export const Text = styled.Text`
   font-size: ${({ size }) => size || '18px'};
   font-weight: bold;
   margin-bottom: 15px;
+  line-height: 50px;
+  width: 60%;
+  text-align: center;
+  text-shadow: 1px 1px 5px #000;
 `;
 
 export const Button = styled.TouchableOpacity`
-  background-color: ${({ color }) => color || '#4ac0ff'};
+  background-color: ${({ color }) => color || '#ffcb21'};
   border-radius: 10px;
   flex-direction: row;
   justify-content: space-evenly;
@@ -72,5 +77,6 @@ export const Button = styled.TouchableOpacity`
   width: 90%;
   height: 50px;
   padding-top: 15px;
+  margin-top: 50px;
 `;
 

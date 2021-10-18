@@ -26,7 +26,7 @@ export default function RecentSearch({ city, coords, screenWidth, search }) {
 
   useEffect(() => {
     (async()=>{
-      let data = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&exclude=minutely,daily,alerts&units=metric&lang=pt_br&appid=2d1071d2a640b454a941894654415839`);
+      let data = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&exclude=minutely,daily,alerts&units=metric&lang=pt_br&appid=6d50e3b0fee937bf00a5e425b2d4e2bf`);
       data = await data.json();
       setTemp(Math.round(data.current.temp));
       setIcon(getIcon(data.hourly[0].weather[0].id, data.hourly[0].dt, 50));
