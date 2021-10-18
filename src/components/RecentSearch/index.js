@@ -23,18 +23,30 @@ import {
 export default function RecentSearch({ city, coords, screenWidth, search }) {
   const [temp, setTemp] = useState(undefined);
   const [icon, setIcon] = useState(undefined);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     (async()=>{
-      let data = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&exclude=minutely,daily,alerts&units=metric&lang=pt_br&appid=6d50e3b0fee937bf00a5e425b2d4e2bf`);
+      let data;
+      try {
+        data = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&exclude=minutely,daily,alerts&units=metric&lang=pt_br&appid=6d50e3b0fee937bf00a5e425b2d4e2bf`);
+      } catch (error) {
+        setError(true);        
+      }
       data = await data.json();
+
+      if(data.cod && data.message) {
+        setError(true);
+        return;
+      }
+
       setTemp(Math.round(data.current.temp));
       setIcon(getIcon(data.hourly[0].weather[0].id, data.hourly[0].dt, 50));
     })();
   }, []);
 
   return (
-    <Container screenWidth={screenWidth} onPress={search}>
+    <Container screenWidth={screenWidth} onPress={search} error={error}>
       <HalfBG
         color="#cbcbcb"
         tlr="600px"
@@ -46,11 +58,16 @@ export default function RecentSearch({ city, coords, screenWidth, search }) {
       {icon === undefined && temp === undefined ? 
         <ActivityIndicator size="large" color="#4ac0ff"/> 
         : <>
-      <Div direction="row" width="80%" height="80px" justify="space-evenly" color="transparent">
-        {icon}
-        <Title>{temp}°</Title>
-      </Div>
-      <Text color="#888" numberOfLines={1}>{city}</Text>
+        <Div direction="row" width="80%" height="80px" justify="space-evenly" color="transparent">
+        {error ? <Text color="#555">Erro ao buscar dados da pesquisa</Text> 
+          :
+          <> 
+            {icon}
+            <Title>{temp}°</Title>
+          </>}
+        </Div>
+        {!error && 
+        <Text color="#888" numberOfLines={1}>{city}</Text>}
       </>}
     </Container>
   );

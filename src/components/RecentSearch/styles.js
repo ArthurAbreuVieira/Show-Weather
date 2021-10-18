@@ -7,7 +7,7 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
   /* background-color: #242cffaa; */
   background-color: #ededed;
-  border: 2px solid #4aaaff;
+  border: 2px solid ${({error}) => error?"orangered":"#4aaaff"};
   border-radius: 10px;
   margin-bottom: 10px;
 `;
@@ -84,7 +84,7 @@ export const RowItem = styled.View`
 
 export const Text = styled.Text`
   color: ${({ color }) => color || '#000'};
-  font-size: 18px;
+  font-size: ${({ size }) => size || '18px'};
   font-weight: bold;
   margin-bottom: 15px;
 `;

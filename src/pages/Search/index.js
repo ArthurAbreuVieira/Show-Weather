@@ -28,6 +28,8 @@ export default function Search({ navigation }) {
   const [loading, setLoading] = useState(false);
 
   async function search(city) {
+    if(city === '') return;
+
     setLoading(true);
     const cityData = await getCityData(city);
     const coords = cityData.coord;
@@ -38,6 +40,7 @@ export default function Search({ navigation }) {
       let historyData = JSON.parse(await AsyncStorage.getItem('@history')) || [];
       const hasCity = historyData.some(item => item.city === city);
       if(!hasCity) {
+        if (historyData.length > 3) historyData.pop();
         historyData.unshift({
           city,
           coords
