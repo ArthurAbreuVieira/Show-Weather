@@ -43,7 +43,7 @@ export default function TabRouter() {
             paddingTop: 25,
             paddingBottom: 25
           },
-          // headerShown: false
+          tabBarLabel: "Início",
           tabBarIcon: ({ focused }) => <Ionicons name={focused?'home':'ios-home-outline'} size={24} color={focused?'#4aaaff':'#888'} />
         }}
       />
@@ -55,7 +55,7 @@ export default function TabRouter() {
             backgroundColor: '#ededed',
             elevation: 10,
           },
-          title: "Search",
+          title: "Pesquisar",
           headerTitleAlign: 'center',
           headerTitleStyle: {
             color: '#777',
@@ -64,6 +64,7 @@ export default function TabRouter() {
             paddingTop: 25,
             paddingBottom: 25
           },
+          tabBarLabel: "Pesquisar",
           tabBarIcon: ({ focused }) => <AntDesign name="search1" size={24} color={focused?'#4aaaff':'#888'} />
           // headerShown: false
         }}

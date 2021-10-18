@@ -24,19 +24,6 @@ export default function StackRouter() {
         name="ForecastRouter" 
         component={ForecastRouter} 
         options={{
-          // headerStyle: {
-          //   backgroundColor: '#ededed',
-          //   elevation: 10,
-          // },
-          // title: "Forecast",
-          // headerTitleAlign: 'center',
-          // headerTitleStyle: {
-          //   color: '#777',
-          //   textAlign: 'center',
-          //   fontWeight: 'bold',
-          //   paddingTop: 25,
-          //   paddingBottom: 25
-          // }
           headerShown: false
         }}
       />

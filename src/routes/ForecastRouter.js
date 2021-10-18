@@ -37,7 +37,7 @@ export default function ForecastRouter({ route }) {
             backgroundColor: '#ededed',
             elevation: 10,
           },
-          title: "Forecast",
+          title: "Previsão do tempo",
           headerTitleAlign: 'center',
           headerTitleStyle: {
             color: '#777',
@@ -46,6 +46,7 @@ export default function ForecastRouter({ route }) {
             paddingTop: 25,
             paddingBottom: 25
           },
+          tabBarLabel: "Agora",
           tabBarIcon: ({ focused }) => <AntDesign name={focused?'cloud':'cloudo'} size={24} color={focused?'#4aaaff':'#888'} />
         }}
         initialParams={{
@@ -61,7 +62,7 @@ export default function ForecastRouter({ route }) {
             backgroundColor: '#ededed',
             elevation: 10,
           },
-          title: "Hourly Forecast",
+          title: "Previsão por Hora",
           headerTitleAlign: 'center',
           headerTitleStyle: {
             color: '#777',
@@ -70,6 +71,7 @@ export default function ForecastRouter({ route }) {
             paddingTop: 25,
             paddingBottom: 25
           },
+          tabBarLabel: "Horária",
           tabBarIcon: ({ focused }) => <AntDesign name={focused?'clockcircle':'clockcircleo'} size={24} color={focused?'#4aaaff':'#888'} />
         }}
         initialParams={{
@@ -85,7 +87,7 @@ export default function ForecastRouter({ route }) {
             backgroundColor: '#ededed',
             elevation: 10,
           },
-          title: "Daily Forecast",
+          title: "Previsão por Dia",
           headerTitleAlign: 'center',
           headerTitleStyle: {
             color: '#777',
@@ -94,6 +96,7 @@ export default function ForecastRouter({ route }) {
             paddingTop: 25,
             paddingBottom: 25
           },
+          tabBarLabel: "Diária",
           tabBarIcon: ({ focused }) => <Ionicons name={focused?'md-today':'md-today-sharp'} size={24} color={focused?'#4aaaff':'#888'} />
         }}
         initialParams={{
