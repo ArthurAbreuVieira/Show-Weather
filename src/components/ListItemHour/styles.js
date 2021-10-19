@@ -5,11 +5,10 @@ export const Container = styled.SafeAreaView`
   height: 50px;
   justify-content: flex-start;
   align-items: center;
-  background-color: #ebebeb;
 `;
 
 export const Title = styled.Text`
-  color: ${({ color }) => color || '#000'};;
+  color: ${({ color, theme }) => color?color:theme.t==='dark'?"#fff":"#000"};
   font-size: 15px;
   font-weight: bold;
 `;

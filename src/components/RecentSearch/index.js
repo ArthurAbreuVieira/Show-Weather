@@ -26,16 +26,16 @@ export default function RecentSearch({ city, coords, screenWidth, search }) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    (async()=>{
+    (async () => {
       let data;
       try {
         data = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&exclude=minutely,daily,alerts&units=metric&lang=pt_br&appid=6d50e3b0fee937bf00a5e425b2d4e2bf`);
       } catch (error) {
-        setError(true);        
+        setError(true);
       }
       data = await data.json();
 
-      if(data.cod && data.message) {
+      if (data.cod && data.message) {
         setError(true);
         return;
       }
@@ -48,27 +48,26 @@ export default function RecentSearch({ city, coords, screenWidth, search }) {
   return (
     <Container screenWidth={screenWidth} onPress={search} error={error}>
       <HalfBG
-        color="#cbcbcb"
         tlr="600px"
         trr="600px"
         blr="30px"
         brr="30px"
         position="bottom"
       />
-      {icon === undefined && temp === undefined ? 
-        <ActivityIndicator size="large" color="#4ac0ff"/> 
+      {icon === undefined && temp === undefined ?
+        <ActivityIndicator size="large" color="#4ac0ff" />
         : <>
-        <Div direction="row" width="80%" height="80px" justify="space-evenly" color="transparent">
-        {error ? <Text color="#555">Erro ao buscar dados da pesquisa</Text> 
-          :
-          <> 
-            {icon}
-            <Title>{temp}°</Title>
-          </>}
-        </Div>
-        {!error && 
-        <Text color="#888" numberOfLines={1}>{city}</Text>}
-      </>}
+          <Div direction="row" width="80%" height="80px" justify="space-evenly" color="transparent">
+            {error ? <Text color="#555">Erro ao buscar dados da pesquisa</Text>
+              :
+              <>
+                {icon}
+                <Title>{temp}°</Title>
+              </>}
+          </Div>
+          {!error &&
+            <Text color="#888" numberOfLines={1}>{city}</Text>}
+        </>}
     </Container>
   );
 }

@@ -5,12 +5,12 @@ export const Container = styled.SafeAreaView`
   justify-content: flex-start;
   align-items: center;
   
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
   /* margin-top: 50px; */
 `;
 
 export const List = styled.FlatList`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
   width: 100%;
   padding-top: 10px;
 `;
@@ -18,7 +18,7 @@ export const List = styled.FlatList`
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 
 export const Title = styled.Text`
-  color: ${({ color }) => color || '#000'};
+  color: ${({ color, theme }) => color?color:theme.t==='dark'?"#fff":"#000"};
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 15px;
@@ -28,7 +28,7 @@ export const Row = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  background-color: ${({ card }) => card && '#ebebeb' || '#fff'};
+  background-color: ${({ card }) => card && theme.t==='dark'?"#ebebeb":"#ebebeb"?color:theme.t==='dark'?"#000":"#fff"};
   border-radius: ${({ card }) => card && '20px' || 0};
   padding: ${({ card }) => card && '10px 0px' || 0};
   width: ${({ card }) => card && '90%' || '100%'};
@@ -43,11 +43,11 @@ export const RowItem = styled.View`
 `;
 
 export const Text = styled.Text`
-  color: ${({ color }) => color || '#777'};
+  color: ${({ color, theme }) => color?color:theme.t==='dark'?"#777":"#777"};
   font-size: 18px;
   font-weight: bold;
   padding: 0 0 20px 0;
-  background-color: #ededed;
+  background-color: ${({ theme }) => theme.t==='dark'?'#444':'#ededed'};
   width: 100%;
   text-align: center;
   /* border-bottom: 2px solid #888; */

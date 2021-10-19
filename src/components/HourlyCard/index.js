@@ -17,7 +17,7 @@ import {
   Row,
 } from './styles';
 
-export default function HourlyCard({ navigation, data }) {
+export default function HourlyCard({ navigation, data, theme }) {
   const hourly = {
     _10: {
       temp: undefined,
@@ -66,7 +66,7 @@ export default function HourlyCard({ navigation, data }) {
     <Container>
       <Row>
         <HalfBG
-          color="#ededed"
+          color={theme==='dark'?"#444":"#ededed"}
           blr="99px"
           brr="99px"
           position="top"

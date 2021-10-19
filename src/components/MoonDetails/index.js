@@ -21,12 +21,12 @@ export default function MoonDetails({ navigation, color, data }) {
       <Row card>
         <RowItem column center >
           <Text>Nascer da lua</Text>
-          <FontAwesome5 name="moon" size={30} color="#49577a" />
+          <FontAwesome5 name="moon" size={30} color="#0051ba" />
           <Text color="#888" >{moonrise}</Text>
         </RowItem>
         <RowItem column center >
           <Text>Pôr da lua</Text>
-          <Ionicons name="md-moon" size={30} color="#49577a" />
+          <Ionicons name="md-moon" size={30} color="#0051ba" />
           <Text color="#888" >{moonset}</Text>
         </RowItem>
       </Row>

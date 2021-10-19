@@ -4,6 +4,8 @@ import { ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { ThemeProvider } from 'styled-components';
+
 import convertTimestamp from '../../util/convertTimestamp';
 
 import {
@@ -23,8 +25,8 @@ import ConditionsDetails from '../../components/ConditionsDetails';
 import SunDetails from '../../components/SunDetails';
 
 export default function Forecast({ navigation, route }) {
-  let { data, location } = route.params;
-  
+  let { data, location, theme } = route.params;
+
   console.log(location);
 
   data = JSON.parse(data);
@@ -41,7 +43,7 @@ export default function Forecast({ navigation, route }) {
 
   useEffect(() => {
     setDataOfDay(days[selectedDay]);
-    if(selectedDay === "today") {
+    if (selectedDay === "today") {
       setDate(convertTimestamp(days.today.current.dt));
     } else {
       setDate(convertTimestamp(days[selectedDay].dt));
@@ -49,30 +51,32 @@ export default function Forecast({ navigation, route }) {
   }, [selectedDay]);
 
   return (
-    <Container>
-      <QuickInfo color="#ededed" data={dataOfDay} date={date} location={location}/>
-      <SelectDay handleDay={setSelectedDay}/>
+    <ThemeProvider theme={{ t: theme }}>
+      <Container>
+        <QuickInfo theme={theme} color="#ededed" data={dataOfDay} date={date} location={location} />
+        <SelectDay handleDay={setSelectedDay}  theme={theme}/>
 
-      <ScrollView 
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
-      >
-      {selectedDay==="today" &&
-      <HourlyCard navigation={navigation} data={dataOfDay}/>}
-      
-      <Section>
-        <Title>Detalhes</Title>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+        >
+          {selectedDay === "today" &&
+            <HourlyCard navigation={navigation} data={dataOfDay} theme={theme}/>}
 
-        <ConditionsDetails data={dataOfDay}/>
-        <SunDetails data={dataOfDay}/>
+          <Section>
+            <Title>Detalhes</Title>
 
-        <Button activeOpacity={.8} onPress={() => navigation.navigate("DailyForecast")}>
-          <Title color="#fff" style={{top: -9}}>Ver previsão diária</Title>
-        </Button>
+            <ConditionsDetails data={dataOfDay} theme={theme}/>
+            <SunDetails data={dataOfDay} theme={theme}/>
 
-      </Section>
+            <Button activeOpacity={.8} onPress={() => navigation.navigate("DailyForecast")}>
+              <Title color="#fff" style={{ top: -9 }}>Ver previsão diária</Title>
+            </Button>
 
-      </ScrollView>
-    </Container>
+          </Section>
+
+        </ScrollView>
+      </Container>
+    </ThemeProvider>
   );
 }

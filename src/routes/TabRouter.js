@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native'
+import { Text } from 'react-native'
 
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
@@ -10,16 +10,21 @@ import Search from '../pages/Search';
 
 const Tab = createBottomTabNavigator();
 
-export default function TabRouter() {
+export default function TabRouter({ navigation, route }) {
+  const { theme } = route.params;
+  // const theme = 'dark';
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
-          backgroundColor: '#ededed',
+          backgroundColor: theme==='dark'?'#ededed':'#444',
+          height: 55,
+          borderTopColor: '#555',
         },
-        tabBarActiveTintColor: '#4aaaff',
+        tabBarInactiveTintColor: '#888',
         tabBarInactiveTintColor: '#555',
         tabBarLabelStyle: {
           fontSize: 13
@@ -31,7 +36,7 @@ export default function TabRouter() {
         component={Home} 
         options={{
           headerStyle: {
-            backgroundColor: '#ededed',
+            backgroundColor: theme==='dark'?'#ededed':'#444',
             elevation: 10,
           },
           title: "Show Weather",
@@ -46,13 +51,16 @@ export default function TabRouter() {
           tabBarLabel: "Início",
           tabBarIcon: ({ focused }) => <Ionicons name={focused?'home':'ios-home-outline'} size={24} color={focused?'#4aaaff':'#888'} />
         }}
+        initialParams={{
+          theme
+        }}
       />
       <Tab.Screen 
         name="Search" 
         component={Search} 
         options={{
           headerStyle: {
-            backgroundColor: '#ededed',
+            backgroundColor: theme==='dark'?'#ededed':'#444',
             elevation: 10,
           },
           title: "Pesquisar",
@@ -67,6 +75,9 @@ export default function TabRouter() {
           tabBarLabel: "Pesquisar",
           tabBarIcon: ({ focused }) => <AntDesign name="search1" size={24} color={focused?'#4aaaff':'#888'} />
           // headerShown: false
+        }}
+        initialParams={{
+          theme
         }}
       />
     </Tab.Navigator>

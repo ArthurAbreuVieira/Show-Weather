@@ -5,6 +5,7 @@ export const Container = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
 `;
 
 export const Card = styled.TouchableOpacity`
@@ -71,7 +72,6 @@ export const Row = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
   width: 100%;
   height: ${({ buttonRow }) => buttonRow && '60px' || '200px'};
 `;

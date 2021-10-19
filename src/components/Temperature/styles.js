@@ -10,9 +10,9 @@ export const Container = styled.View`
 
 export const Card = styled.View`
   flex-direction: ${({ column }) => column && 'column' || 'row'};
-  justify-content: ${({ center }) => center && 'center' || 'space-between'};
+  justify-content: ${({ center }) => center && 'center' || 'space-evenly'};
   align-items: center;
-  background-color: ${({ color }) => color || '#ebebeb'};
+  background-color: ${({ theme }) => theme.t==='dark'?"#444":"#ebebeb"};
   border-radius: 20px;
   padding: 5px 0 0 0;
   width: 49%;
@@ -26,7 +26,7 @@ export const RowItem = styled.View`
 `;
 
 export const Text = styled.Text`
-  color: ${({ color }) => color || '#000'};
+  color: ${({ color, theme }) => color ? color : theme.t==='dark'?"#fff":"#000"};
   font-size: ${({ size }) => size || '18px'};
   font-weight: bold;
   margin-bottom: 15px;

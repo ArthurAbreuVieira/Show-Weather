@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Forecast from '../pages/Forecast';
@@ -11,6 +11,8 @@ import ForecastRouter from './ForecastRouter';
 const Stack = createStackNavigator();
 
 export default function StackRouter() {
+  const theme = 'dark';
+
   return (
     <Stack.Navigator>
       <Stack.Screen 
@@ -18,6 +20,9 @@ export default function StackRouter() {
         component={TabRouter} 
         options={{
           headerShown: false
+        }}
+        initialParams={{
+          theme
         }}
       />
       <Stack.Screen 

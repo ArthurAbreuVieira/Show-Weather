@@ -15,7 +15,7 @@ export const Option = styled.TouchableOpacity`
 
 export const OptionText = styled.Text`
   font-size: 18px;
-  color: ${({ focused }) => focused ? '#000' : '#bbb'};
+  color: ${({ focused, theme }) => focused ? (theme.t==='dark'?"#fff":"#000") : theme.t==='dark'?"#888":"#bbb"};
   font-weight: 700;
   margin: 0 8px;
 `;

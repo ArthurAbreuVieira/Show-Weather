@@ -12,7 +12,7 @@ import DailyForecast from '../pages/DailyForecast';
 const Tab = createBottomTabNavigator();
 
 export default function ForecastRouter({ route }) {
-  const { data, location } = route.params;
+  const { data, location, theme } = route.params;
 
   return (
     <Tab.Navigator
@@ -20,10 +20,11 @@ export default function ForecastRouter({ route }) {
       screenOptions={{
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
-          backgroundColor: '#ededed',
+          backgroundColor: theme==='dark'?'#444':'#ededed',
+          height: 55,
+          borderTopColor: '#555',
         },
-        tabBarActiveTintColor: '#4aaaff',
-        tabBarInactiveTintColor: '#555',
+        tabBarInactiveTintColor: '#888',
         tabBarLabelStyle: {
           fontSize: 13
         },
@@ -34,8 +35,8 @@ export default function ForecastRouter({ route }) {
         component={Forecast} 
         options={{
           headerStyle: {
-            backgroundColor: '#ededed',
-            elevation: 10,
+            backgroundColor: theme==='dark'?'#444':'#ededed',
+            elevation: 20,
           },
           title: "Previsão do tempo",
           headerTitleAlign: 'center',
@@ -51,7 +52,8 @@ export default function ForecastRouter({ route }) {
         }}
         initialParams={{
           data,
-          location
+          location,
+          theme
         }}
       />
       <Tab.Screen 
@@ -59,7 +61,7 @@ export default function ForecastRouter({ route }) {
         component={HourlyForecast} 
         options={{
           headerStyle: {
-            backgroundColor: '#ededed',
+            backgroundColor: theme==='dark'?'#444':'#ededed',
             elevation: 0,
           },
           title: "Previsão por Hora",
@@ -76,7 +78,8 @@ export default function ForecastRouter({ route }) {
         }}
         initialParams={{
           data,
-          location
+          location,
+          theme
         }}
       />
       <Tab.Screen 
@@ -84,8 +87,8 @@ export default function ForecastRouter({ route }) {
         component={DailyForecast} 
         options={{
           headerStyle: {
-            backgroundColor: '#ededed',
-            elevation: 10,
+            backgroundColor: theme==='dark'?'#444':'#ededed',
+            elevation: 20,
           },
           title: "Previsão por Dia",
           headerTitleAlign: 'center',
@@ -101,7 +104,8 @@ export default function ForecastRouter({ route }) {
         }}
         initialParams={{
           data,
-          location
+          location,
+          theme
         }}
       />
     </Tab.Navigator>

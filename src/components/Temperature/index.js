@@ -14,17 +14,17 @@ export default function Temperature({ data }) {
   return (
     <Container>
       <RowItem>
-        <Card column center >
+        <Card column  >
           <Text>Temperatura minima</Text>
-          <Card width="">
+          <Card>
             <FontAwesome5 name="temperature-low" size={35} color="#00a2ff" style={{ top: -5 }} />
             <Text color="#888" size="30px" >{Math.round(data.min)}°</Text>
           </Card>
         </Card>
 
-        <Card column center >
+        <Card column >
           <Text>Temperatura maxima</Text>
-          <Card width="">
+          <Card>
             <FontAwesome5 name="temperature-high" size={35} color="orangered" style={{ top: -5 }} />
             <Text color="#888" size="30px" >{Math.round(data.max)}°</Text>
           </Card>

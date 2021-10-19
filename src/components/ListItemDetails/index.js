@@ -21,7 +21,7 @@ export default function ListItemDetails({ data }) {
 
   return (
     <Container>
-      <ConditionsDetails color="#ededed" data={data}/>
+      <ConditionsDetails data={data}/>
 
       <Row card style={{top: -20}}>
         <RowItem column large >

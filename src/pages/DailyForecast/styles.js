@@ -4,7 +4,7 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
   /* margin-top: 50px; */
 `;
 
@@ -12,7 +12,7 @@ export const Div = styled.View`
   flex-direction: ${({ direction }) => direction || 'column'};
   justify-content: ${({ justify }) => justify || 'center'};
   align-items: center;
-  background-color: ${({ color }) => color || '#fff'};
+  background-color: ${({ color, theme }) => color?color:theme.t==='dark'?"#222":"#fff"};
   border-radius: ${({ card }) => card && '20px' || 0};
   padding: ${({ card }) => card && '10px 0px' || 0};
   width: ${({ card, width }) => {
@@ -27,21 +27,21 @@ export const Div = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: ${({ color }) => color || '#000'};
+  color: ${({ color, theme }) => color?color:theme.t==='dark'?"#fff":"#000"};
   font-size: ${({ size }) => size || '22px'};
   font-weight: bold;
   margin-bottom: 15px;
 `;
 
 export const Text = styled.Text`
-  color: ${({ color }) => color || '#000'};
+  color: ${({ color, theme }) => color?color:theme.t==='dark'?"#fff":"#000"};
   font-size: ${({ size }) => size || '18px'};
   font-weight: bold;
   margin-bottom: 15px;
 `;
 
 export const List = styled.FlatList`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
   width: 100%;
   padding-top: 50px;
 `;
@@ -60,7 +60,6 @@ export const Row = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  background-color: ${({ card }) => card && '#ebebeb' || '#fff'};
   border-radius: ${({ card }) => card && '20px' || 0};
   padding: ${({ card }) => card && '10px 0px' || 0};
   width: ${({ card }) => card && '90%' || '100%'};

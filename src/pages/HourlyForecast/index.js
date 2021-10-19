@@ -3,6 +3,8 @@ import { Dimensions } from 'react-native';
 
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { ThemeProvider } from 'styled-components';
+
 import convertTimestamp from '../../util/convertTimestamp';
 
 import ListItem from '../../components/ListItem';
@@ -18,39 +20,41 @@ import {
 } from './styles'
 
 export default function HourlyForecast({ route }) {
-  let { data } = route.params;
-  
+  let { data, location, theme } = route.params;
+
   data = JSON.parse(data).hourly;
-  
+
   const date = convertTimestamp(data[0].dt);
 
   const dailyData = [];
 
   data.forEach(day => {
-    if(convertTimestamp(day.dt).day === convertTimestamp(data[0].dt).day) {
+    if (convertTimestamp(day.dt).day === convertTimestamp(data[0].dt).day) {
       dailyData.push(day);
     }
   });
 
   // console.log(data);
-  
+
 
   return (
-    <Container>
-      <Text
-        style={{
-          borderBottomWidth: 2,
-          borderBottomColor: "#888"
-        }}
-      >{`${date.dayOfWeek}, ${date.date}`}</Text>
-      <List
-        contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
-        data={dailyData}
-        renderItem={({ item }) => (
-          <ListItem data={item} screenWidth={Dimensions.get('window').width}/>
-        )}
-        keyExtractor={(item, index) => String(index)}
-      />
-    </Container>
+    <ThemeProvider theme={{ t: theme }}>
+      <Container>
+        <Text
+          style={{
+            borderBottomWidth: 2,
+            borderBottomColor: "#000"
+          }}
+        >{`${location} - ${date.dayOfWeek}, ${date.date}`}</Text>
+        <List
+          contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+          data={dailyData}
+          renderItem={({ item }) => (
+            <ListItem data={item} screenWidth={Dimensions.get('window').width} />
+          )}
+          keyExtractor={(item, index) => String(index)}
+        />
+      </Container>
+    </ThemeProvider>
   );
 }

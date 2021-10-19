@@ -13,7 +13,7 @@ import {
   Location,
 } from './styles';
 
-export default function QuickInfo({ color, data, date, location }) {
+export default function QuickInfo({ color, data, date, location, theme }) {
   const formatedDate = date.date;
 
   console.log(location);
@@ -23,7 +23,7 @@ export default function QuickInfo({ color, data, date, location }) {
   data = data.hasOwnProperty("current") ? data.current : data;
 
   return (
-    <Container color={color}>
+    <Container color_={color}>
       {/* <Ionicons name="sunny-sharp" size={45} color="#ffa53b" /> */}
       {getIcon(data.weather[0].id, data.dt, 55)}
       <Temperature>{temperature}°</Temperature>
