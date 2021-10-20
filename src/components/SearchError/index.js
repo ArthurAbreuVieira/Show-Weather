@@ -26,7 +26,7 @@ export default function SearchError({ visible, setVisible, message, reload }) {
     >
       <Container>
         <Card>
-          <Title color="#666">{message}</Title>
+          <Title>{message}</Title>
           <Div color="transparent" direction="column" justify="center" width="100%">
           {message === "Cidade não encontrada" &&
           <MaterialIcons name="error" size={70} color="orangered" style={{marginTop: 20}}/>}

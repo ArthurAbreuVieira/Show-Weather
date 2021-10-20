@@ -3,7 +3,7 @@ import { ActivityIndicator, useColorScheme } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { FontAwesome5, AntDesign } from '@expo/vector-icons';
 
 import { ThemeProvider } from 'styled-components';
 
@@ -59,11 +59,13 @@ export default function Home({ navigation, route }) {
       cityData = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=2d1071d2a640b454a941894654415839`);
       cityData = await cityData.json();
     } catch (error) {
+      setLoadingCard(false);
       setError(true);
       return;
     }
 
     if (cityData.cod && cityData.message) {
+      setLoadingCard(false);
       setError(true);
       return;
     }
@@ -77,11 +79,13 @@ export default function Home({ navigation, route }) {
       data = await fetchWeatherContent(location.coords.latitude, location.coords.longitude);
       await AsyncStorage.setItem('@weather_data', JSON.stringify(data));
     } catch (error) {
+      setLoadingCard(false);
       setError(true);
       return;
     }
 
     if (data.cod && data.message) {
+      setLoadingCard(false);
       setError(true);
       return;
     }
@@ -166,7 +170,7 @@ export default function Home({ navigation, route }) {
             </Button>
           </Card>
 
-          <Button color="#70f" onPress={() => {
+          <Button color={theme==='dark'?'#ededed':'#444'} onPress={() => {//"#70f"
             navigation.setOptions({
               tabBarStyle: {
                 backgroundColor: theme==='dark'?'#ededed':'#444',
@@ -178,10 +182,11 @@ export default function Home({ navigation, route }) {
                 backgroundColor: theme==='dark'?'#ededed':'#444',
                 elevation: 10,
               }
-            })
+            });
             navigation.setParams({theme:theme==='dark'?'light':'dark'})
           }}>
-              <Text color="#fff">Alterar para tema {theme==="dark"?"claro":"escuro"}</Text>
+              <Text color={theme==='dark'?'#444':'#ededed'}>Alterar para tema {theme==="dark"?"claro":"escuro"}</Text>
+              <FontAwesome5 name="exchange-alt" size={24} color={theme==='dark'?'#444':'#ededed'} style={{ top: -5 }} />
             </Button>
 
         </Div>

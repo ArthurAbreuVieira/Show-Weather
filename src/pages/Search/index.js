@@ -35,6 +35,15 @@ export default function Search({ navigation, route }) {
 
   const { theme } = route.params;
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: theme==='dark'?'#444':'#ededed',
+        elevation: 10,
+      }
+    });
+  });
+
   async function clearHistory() {
     setLoading(true);
     return await AsyncStorage.setItem('@history', JSON.stringify([]));
@@ -56,7 +65,7 @@ export default function Search({ navigation, route }) {
       return;
     }
 
-    if (cityData.cod == 404) {
+    if (cityData?.cod == 404) {
       setLoading(false);
       setError(true);
       setErrorMessage("Cidade não encontrada")
@@ -69,11 +78,12 @@ export default function Search({ navigation, route }) {
     try {
       data = await fetchWeatherContent(coords.lat, coords.lon);
     } catch (error) {
+      setLoading(false);
       setError(true);
       setErrorMessage("Erro ao obter dados da pesquisa");
     }
 
-    if (data.cod && data.message) {
+    if (data?.cod && data?.message) {
       setLoading(false);
       setError(true);
       setErrorMessage("Erro ao obter dados da pesquisa");

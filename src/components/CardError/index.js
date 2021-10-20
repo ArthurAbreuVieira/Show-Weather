@@ -16,10 +16,10 @@ import {
 
 } from './styles'
 
-export default function CardError({ reload }) {
+export default function CardError({ reload, theme }) {
   return (
     <Card>
-      <Title color="#666">Não foi possivel obter sua localização</Title>
+      <Title>Não foi possivel obter sua localização</Title>
       <Div color="transparent" direction="row" justify="space-around" width="100%">
         <Button onPress={reload}>
           <Entypo name="warning" size={30} color="#fff" style={{top: -6}} />

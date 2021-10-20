@@ -23,7 +23,7 @@ export const MainRow = styled.View`
 `;
 
 export const Button = styled.TouchableOpacity`
-  background-color: ${({ color }) => color || '#49577a'};
+  background-color: ${({ color }) => color || '#0051ba'};
   border-radius: 10px;
   flex-direction: row;
   justify-content: center;

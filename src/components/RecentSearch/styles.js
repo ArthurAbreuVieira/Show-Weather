@@ -83,7 +83,7 @@ export const RowItem = styled.View`
 `;
 
 export const Text = styled.Text`
-  color: ${({ color, theme }) => color || theme.t==='dark'?"#fff":"#000"};
+  color: ${({ color, theme }) => color?color:theme.t==='dark'?"#eee":"#777"};
   font-size: ${({ size }) => size || '18px'};
   font-weight: bold;
   margin-bottom: 15px;

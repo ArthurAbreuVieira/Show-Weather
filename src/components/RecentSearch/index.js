@@ -66,7 +66,7 @@ export default function RecentSearch({ city, coords, screenWidth, search }) {
               </>}
           </Div>
           {!error &&
-            <Text color="#888" numberOfLines={1}>{city}</Text>}
+            <Text numberOfLines={1}>{city}</Text>}
         </>}
     </Container>
   );
