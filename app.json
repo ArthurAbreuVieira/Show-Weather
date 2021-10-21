@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Show-Weather",
+    "name": "Show Weather",
     "slug": "Show-Weather",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0e2e47"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
