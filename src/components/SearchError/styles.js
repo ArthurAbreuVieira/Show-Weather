@@ -40,7 +40,6 @@ export const Button = styled.TouchableOpacity`
 
 export const Card = styled.View`
   width: 90%;
-  /* height: 250px; */
   justify-content: space-around;
   align-items: center;
   border-radius: 10px;

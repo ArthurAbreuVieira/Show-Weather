@@ -18,9 +18,6 @@ import {
   List,
   Title,
   Text,
-  Row,
-  RowItem,
-  Button,
   SearchButton,
   ClearButton,
   Div,
@@ -32,6 +29,8 @@ export default function Search({ navigation, route }) {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [lastAttempt, setLastAttempt] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [history, setHistory] = useState([]);  
 
   const { theme } = route.params;
 
@@ -51,11 +50,14 @@ export default function Search({ navigation, route }) {
 
   async function search(city) {
     if (city === '') return;
+
     setLastAttempt(city);
     setError(false);
     setLoading(true);
     setErrorMessage("");
+
     let cityData;
+
     try {
       cityData = await getCityData(city);
     } catch (error) {
@@ -76,7 +78,7 @@ export default function Search({ navigation, route }) {
 
     let data;
     try {
-      data = await fetchWeatherContent(coords.lat, coords.lon);
+      data = await fetchWeatherContent(coords.lat, coords.lon, '9b8ccf107cbd573f67e35d2219bd2cb9');
     } catch (error) {
       setLoading(false);
       setError(true);
@@ -90,9 +92,8 @@ export default function Search({ navigation, route }) {
       return;
     }
 
-    // console.log(data);
     if (data) {
-      let historyData = JSON.parse(await AsyncStorage.getItem('@history')) || [];
+      const historyData = JSON.parse(await AsyncStorage.getItem('@history')) || [];
       const hasCity = historyData.some(item => item.city === city);
       if (!hasCity) {
         if (historyData.length > 3) historyData.pop();
@@ -100,34 +101,42 @@ export default function Search({ navigation, route }) {
           city,
           coords
         });
+
         await AsyncStorage.setItem('@history', JSON.stringify(historyData));
       }
+
       setLoading(false);
       setError(false);
       setErrorMessage("");
-      navigation.navigate("ForecastRouter", { data: JSON.stringify(data), location: `${cityData.name}, ${cityData.sys.country}` });
+      
+      navigation.navigate("ForecastRouter", { 
+        data: JSON.stringify(data), 
+        location: `${cityData.name}, ${cityData.sys.country}`
+      });
     }
   }
-
-  const [inputValue, setInputValue] = useState('');
-  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     (async () => {
       setHistory(JSON.parse(await AsyncStorage.getItem('@history')) || []);
     })();
-  }, [history]);
+  }, []);
 
   return (
     <ThemeProvider theme={{ t: theme }}>
       <Container>
         <LoadingModal visible={loading} />
-        <SearchError message={errorMessage} visible={error} setVisible={setError}
+        <SearchError 
+          message={errorMessage} 
+          visible={error} 
+          setVisible={setError}
           reload={() => search(lastAttempt)}
         />
 
         <Div direction="row" justify="space-evenly">
-          <Input autoCapitalize="words" value={inputValue}
+          <Input 
+            autoCapitalize="words" 
+            value={inputValue}
             onChangeText={text => setInputValue(text)}
           />
           <SearchButton onPress={async () => await search(inputValue)}>
@@ -136,19 +145,27 @@ export default function Search({ navigation, route }) {
         </Div>
 
         <Div justify="flex-start">
-          <Div justify="space-evenly" direction="row" width="86.5%">
+          <Div 
+            justify="space-evenly" 
+            direction="row" 
+            width="86.5%"
+          >
             <Title align="left" fullWidth >Pesquisas recentes</Title>
+
             {history.length > 0 &&
-            <ClearButton onPress={async () => {
-              await clearHistory();
-              setLoading(false);
-            }}>
+              <ClearButton onPress={async () => {
+                await clearHistory();
+                setLoading(false);
+              }}>
                 <FontAwesome5 name="trash-alt" size={24} color="#f00" />
-            </ClearButton>}
+              </ClearButton>}
+
           </Div>
           {history.length > 0 ?
             <List
-              contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'center' }}
+              contentContainerStyle={{ 
+                justifyContent: 'flex-start', alignItems: 'center' 
+              }}
               showsVerticalScrollIndicator={false}
               data={history}
               keyExtractor={(item, index) => String(index)}
@@ -161,7 +178,12 @@ export default function Search({ navigation, route }) {
                 />
               )}
             /> :
-            <Div justify="center" direction="row" width="100%" height="70%">
+            <Div 
+              justify="center" 
+              direction="row" 
+              width="100%" 
+              height="70%"
+            >
               <Text color="#888">Você não tem pesquisas no histórico</Text>
             </Div>}
         </Div>

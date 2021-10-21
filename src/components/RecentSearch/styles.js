@@ -12,31 +12,6 @@ export const Container = styled.TouchableOpacity`
   margin-bottom: 10px;
 `;
 
-export const List = styled.FlatList`
-  background-color: ${({ theme }) => theme.t==='dark'?"#000":"#fff"};
-  width: 100%;
-`;
-
-export const MainRow = styled.View`
-  width: 100%;
-  height: 80px;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-export const Button = styled.TouchableOpacity`
-  background-color: ${({ color }) => color || '#49577a'};
-  border-radius: 10px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 150px;
-  height: 30px;
-  padding-top: 15px;
-  margin: 20px 0;
-`;
-
 export const Title = styled.Text`
   color: ${({ color, theme }) => color ? color : theme.t==='dark'?"#fff":"#000"};;
   font-size: 35px;
@@ -54,7 +29,7 @@ export const Div = styled.View`
   height: ${({ height }) => height || 'auto'};
   position: ${({ position }) => position || 'relative'};
   z-index: ${({ hover }) => hover && 10 || 0};
-  top: 0;
+  top: -5px;
 `;
 
 export const HalfBG = styled.View`
@@ -72,21 +47,9 @@ export const HalfBG = styled.View`
   z-index: -1;
 `;
 
-//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
-
-export const RowItem = styled.View`
-  flex-direction: ${({ column }) => column && 'column' || 'row'};
-  justify-content: ${({ center }) => center && 'center' || 'space-between'};
-  align-items: ${({ center }) => center && 'center' || 'flex-start'};
-  /* background-color: aliceblue; */
-  width: 38%;
-`;
-
 export const Text = styled.Text`
   color: ${({ color, theme }) => color?color:theme.t==='dark'?"#eee":"#777"};
   font-size: ${({ size }) => size || '18px'};
   font-weight: bold;
   margin-bottom: 15px;
 `;
-
-

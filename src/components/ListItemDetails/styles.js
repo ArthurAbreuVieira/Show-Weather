@@ -14,12 +14,6 @@ export const Text = styled.Text`
   font-weight: bold;
 `;
 
-export const Title = styled.Text`
-  color: ${({ color, theme }) => color?color:theme.t==='dark'?"#fff":"#000"};;
-  font-size: 22px;
-  font-weight: bold;
-`;
-
 export const Row = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
@@ -36,6 +30,5 @@ export const RowItem = styled.View`
   flex-direction: ${({ column }) => column && 'column' || 'row'};
   justify-content: ${({ center }) => center && 'center' || 'space-between'};
   align-items: ${({ center }) => center && 'center' || 'flex-start'};
-  /* background-color: aliceblue; */
   width: ${({ large }) => large && '90%' || '38%'};
 `;

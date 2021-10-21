@@ -32,24 +32,6 @@ export const Div = styled.View`
   top: 0;
 `;
 
-export const Header = styled.View`
-  background-color: #fff;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 110px;
-
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Section = styled.View`
-  background-color: ${({ theme }) => theme.t==='dark'?"#000":"#fff"};
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const Title = styled.Text`
   color: ${({ color, theme }) => color?color:theme.t==='dark'?"#fff":"#000"};;
   font-size: 25px;
@@ -73,4 +55,3 @@ export const Button = styled.TouchableOpacity`
   height: 50px;
   padding-top: 15px;
 `;
-

@@ -12,7 +12,7 @@ import {
   RowItem,
 } from './styles'
 
-export default function MoonDetails({ navigation, color, data }) {
+export default function MoonDetails({ data }) {
   const moonrise = convertTimestamp(data.hasOwnProperty("current") ? data.current.moonrise : data.moonrise).hour;
   const moonset = convertTimestamp(data.hasOwnProperty("current") ? data.current.moonset : data.moonset).hour;
 

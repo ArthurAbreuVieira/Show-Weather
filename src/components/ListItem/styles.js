@@ -9,11 +9,6 @@ export const Container = styled.SafeAreaView`
   margin-bottom: 10px;
 `;
 
-export const List = styled.FlatList`
-  background-color: #fff;
-  width: 100%;
-`;
-
 export const MainRow = styled.View`
   width: 100%;
   height: 80px;
@@ -40,21 +35,9 @@ export const Title = styled.Text`
   font-weight: bold;
 `;
 
-//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
-
-export const RowItem = styled.View`
-  flex-direction: ${({ column }) => column && 'column' || 'row'};
-  justify-content: ${({ center }) => center && 'center' || 'space-between'};
-  align-items: ${({ center }) => center && 'center' || 'flex-start'};
-  /* background-color: aliceblue; */
-  width: 38%;
-`;
-
 export const Text = styled.Text`
   color: ${({ color, theme }) => color?color:theme.t==='dark'?"#fff":"#000"};
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;
 `;
-
-

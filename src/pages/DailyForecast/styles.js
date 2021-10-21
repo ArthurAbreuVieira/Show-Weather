@@ -5,7 +5,6 @@ export const Container = styled.SafeAreaView`
   justify-content: flex-start;
   align-items: center;
   background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
-  /* margin-top: 50px; */
 `;
 
 export const Div = styled.View`
@@ -40,19 +39,10 @@ export const Text = styled.Text`
   margin-bottom: 15px;
 `;
 
-export const List = styled.FlatList`
-  background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
-  width: 100%;
-  padding-top: 50px;
-`;
-
-//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
-
 export const RowItem = styled.View`
   flex-direction: ${({ column }) => column && 'column' || 'row'};
   justify-content: ${({ center }) => center && 'center' || 'space-between'};
   align-items: ${({ center }) => center && 'center' || 'flex-start'};
-  /* background-color: aliceblue; */
   width: 38%;
 `;
 
@@ -77,4 +67,3 @@ export const Button = styled.TouchableOpacity`
   ${({ left }) => left && 'left: 0;'}
   ${({ right }) => right && 'right: 0;'}
 `;
-

@@ -19,7 +19,6 @@ export const RowItem = styled.View`
   flex-direction: ${({ column }) => column && 'column' || 'row'};
   justify-content: ${({ center }) => center && 'center' || 'space-between'};
   align-items: ${({ center }) => center && 'center' || 'flex-start'};
-  /* background-color: aliceblue; */
   width: 38%;
 `;
 

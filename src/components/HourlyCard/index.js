@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Feather, FontAwesome5, Ionicons } from '@expo/vector-icons';
-
 import convertTimestamp from '../../util/convertTimestamp';
 import getIcon from '../../util/getIcon';
 
@@ -32,47 +30,51 @@ export default function HourlyCard({ navigation, data, theme }) {
       icon: undefined
     },
   };
+  
+  const { _10, _18, _22 } = hourly;
 
   if (data.hasOwnProperty("hourly")) {
 
     for (const hour of data.hourly) {
-      if(hourly._10.temp !== undefined && hourly._18.temp !== undefined && hourly._22.temp !== undefined) break;
+      if (_10.temp !== undefined && _18.temp !== undefined && _22.temp !== undefined) break;
 
-      if(convertTimestamp(hour.dt).single_hour == "10") {
-        
-
-        hourly._10.temp = Math.round(hour.temp);
-        hourly._10.icon = getIcon(hour.weather[0].id, hour.dt, 40, "#fff");
-      } else if(convertTimestamp(hour.dt).hour === "18:00") {
-        hourly._18.temp = Math.round(hour.temp);
-        hourly._18.icon = getIcon(hour.weather[0].id, hour.dt, 40, "#fff");
-      } else if(convertTimestamp(hour.dt).hour === "20:00") {
-        hourly._22.temp = Math.round(hour.temp);
-        hourly._22.icon = getIcon(hour.weather[0].id, hour.dt, 40, "#fff");
+      if (convertTimestamp(hour.dt).single_hour == "10") {
+        _10.temp = Math.round(hour.temp);
+        _10.icon = getIcon(hour.weather[0].id, hour.dt, 40, "#fff");
+      } else if (convertTimestamp(hour.dt).hour === "18:00") {
+        _18.temp = Math.round(hour.temp);
+        _18.icon = getIcon(hour.weather[0].id, hour.dt, 40, "#fff");
+      } else if (convertTimestamp(hour.dt).hour === "20:00") {
+        _22.temp = Math.round(hour.temp);
+        _22.icon = getIcon(hour.weather[0].id, hour.dt, 40, "#fff");
       }
     }
   } else {
-    hourly._10.temp = Math.floor(data.temp.morn);
-    hourly._10.icon = getIcon(data.weather[0], data.dt, 40, "#fff");
+    _10.temp = Math.floor(data.temp.morn);
+    _10.icon = getIcon(data.weather[0], data.dt, 40, "#fff");
 
-    hourly._18.temp = Math.floor(data.temp.day);
-    hourly._18.icon = getIcon(data.weather[0], data.dt, 40, "#fff");
+    _18.temp = Math.floor(data.temp.day);
+    _18.icon = getIcon(data.weather[0], data.dt, 40, "#fff");
 
-    hourly._22.temp = Math.floor(data.temp.night);
-    hourly._22.icon = getIcon(data.weather[0], data.dt, 40, "#fff");
+    _22.temp = Math.floor(data.temp.night);
+    _22.icon = getIcon(data.weather[0], data.dt, 40, "#fff");
   }
 
   return (
     <Container>
       <Row>
         <HalfBG
-          color={theme==='dark'?"#444":"#ededed"}
+          color={theme === 'dark' ? "#444" : "#ededed"}
           blr="99px"
           brr="99px"
           position="top"
         />
 
-        <Card color="#f58a5b" activeOpacity={.7} onPress={() => navigation.navigate("HourlyForecast")}>
+        <Card 
+          color="#f58a5b" 
+          activeOpacity={.7} 
+          onPress={() => navigation.navigate("HourlyForecast")}
+        >
           <HalfBG
             color="#e16f7b"
             tlr="45px"
@@ -82,12 +84,15 @@ export default function HourlyCard({ navigation, data, theme }) {
           />
           <Content>
             <Hour>10:00</Hour>
-            {/* <Feather name="cloud-rain" size={40} color="#fff" /> */}
-            {hourly._10.icon}
-            <Temperature>{hourly._10.temp}°</Temperature>
+            {_10.icon}
+            <Temperature>{_10.temp}°</Temperature>
           </Content>
         </Card>
-        <Card color="#b46490" activeOpacity={.7} onPress={() => navigation.navigate("HourlyForecast")}>
+        <Card 
+          color="#b46490" 
+          activeOpacity={.7} 
+          onPress={() => navigation.navigate("HourlyForecast")}
+        >
           <HalfBG
             color="#7b5f8f"
             blr="20px"
@@ -96,12 +101,15 @@ export default function HourlyCard({ navigation, data, theme }) {
           />
           <Content>
             <Hour>18:00</Hour>
-            {/* <Ionicons name="sunny-sharp" size={40} color="#fff" /> */}
-            {hourly._18.icon}
-            <Temperature>{hourly._18.temp}°</Temperature>
+            {_18.icon}
+            <Temperature>{_18.temp}°</Temperature>
           </Content>
         </Card>
-        <Card color="#2f4858" activeOpacity={.7} onPress={() => navigation.navigate("HourlyForecast")}>
+        <Card 
+          color="#2f4858" 
+          activeOpacity={.7} 
+          onPress={() => navigation.navigate("HourlyForecast")}
+        >
           <HalfBG
             color="#49577a"
             tlr="20px"
@@ -111,14 +119,18 @@ export default function HourlyCard({ navigation, data, theme }) {
           />
           <Content>
             <Hour>22:00</Hour>
-            {hourly._22.icon}
-            <Temperature>{hourly._22.temp}°</Temperature>
+            {_22.icon}
+            <Temperature>{_22.temp}°</Temperature>
           </Content>
         </Card>
 
       </Row>
       <Row buttonRow>
-        <Button activeOpacity={.8} onPress={() => navigation.navigate("HourlyForecast")} color="#e16f7b">
+        <Button 
+          activeOpacity={.8} 
+          onPress={() => navigation.navigate("HourlyForecast")}
+          color="#e16f7b"
+        >
           <Text color="#fff">Ver previsão horária</Text>
         </Button>
       </Row>

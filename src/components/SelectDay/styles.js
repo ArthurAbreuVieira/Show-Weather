@@ -6,7 +6,6 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
 `;
 
 export const Option = styled.TouchableOpacity`

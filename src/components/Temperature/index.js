@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -14,19 +13,33 @@ export default function Temperature({ data }) {
   return (
     <Container>
       <RowItem>
-        <Card column  >
+        <Card column >
           <Text>Temperatura minima</Text>
           <Card>
-            <FontAwesome5 name="temperature-low" size={35} color="#00a2ff" style={{ top: -5 }} />
-            <Text color="#888" size="30px" >{Math.round(data.min)}°</Text>
+            <FontAwesome5 
+              name="temperature-low" 
+              size={35} 
+              color="#00a2ff" 
+              style={{ top: -5 }} 
+            />
+            <Text color="#888" size="30px" >
+              {Math.round(data.min)}°
+            </Text>
           </Card>
         </Card>
 
         <Card column >
           <Text>Temperatura maxima</Text>
           <Card>
-            <FontAwesome5 name="temperature-high" size={35} color="orangered" style={{ top: -5 }} />
-            <Text color="#888" size="30px" >{Math.round(data.max)}°</Text>
+            <FontAwesome5 
+              name="temperature-high" 
+              size={35} 
+              color="orangered" 
+              style={{ top: -5 }} 
+            />
+            <Text color="#888" size="30px" >
+              {Math.round(data.max)}°
+            </Text>
           </Card>
         </Card>
       </RowItem>

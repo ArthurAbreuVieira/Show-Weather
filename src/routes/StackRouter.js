@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import { useColorScheme } from 'react-native';
 
-import Forecast from '../pages/Forecast';
-import HourlyForecast from '../pages/HourlyForecast';
-import DailyForecast from '../pages/DailyForecast';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import ForecastRouter from './ForecastRouter';
 import Home from '../pages/Home';
@@ -12,7 +10,7 @@ import Search from '../pages/Search';
 const Stack = createStackNavigator();
 
 export default function StackRouter() {
-  const theme = 'dark';
+  const theme = useColorScheme() || 'light';
 
   return (
     <Stack.Navigator initialRouteName="Home">

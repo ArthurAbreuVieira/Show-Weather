@@ -1,15 +1,7 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
-  flex: 1;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
-`;
-
 export const Card = styled.View`
   width: 90%;
-  /* height: 250px; */
   justify-content: space-around;
   align-items: center;
   border-radius: 10px;
@@ -30,24 +22,6 @@ export const Div = styled.View`
   position: ${({ position }) => position || 'relative'};
   z-index: ${({ hover }) => hover && 10 || 0};
   top: 0;
-`;
-
-export const Header = styled.View`
-  background-color: #fff;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 110px;
-
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Section = styled.View`
-  background-color: ${({ theme }) => theme.t==='dark'?"#222":"#fff"};
-  width: 100%;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const Title = styled.Text`
@@ -79,4 +53,3 @@ export const Button = styled.TouchableOpacity`
   padding-top: 15px;
   margin-top: 50px;
 `;
-

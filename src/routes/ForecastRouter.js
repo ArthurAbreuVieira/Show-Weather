@@ -1,5 +1,4 @@
 import React from 'react';
-import { Dimensions } from 'react-native'
 
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
@@ -48,7 +47,12 @@ export default function ForecastRouter({ route }) {
             paddingBottom: 25
           },
           tabBarLabel: "Agora",
-          tabBarIcon: ({ focused }) => <AntDesign name={focused?'cloud':'cloudo'} size={24} color={focused?'#4aaaff':'#888'} />
+          tabBarIcon: ({ focused }) => 
+            <AntDesign 
+              name={focused?'cloud':'cloudo'} 
+              size={24} 
+              color={focused?'#4aaaff':'#888'} 
+            />
         }}
         initialParams={{
           data,
@@ -74,7 +78,12 @@ export default function ForecastRouter({ route }) {
             paddingBottom: 25
           },
           tabBarLabel: "Horária",
-          tabBarIcon: ({ focused }) => <AntDesign name={focused?'clockcircle':'clockcircleo'} size={24} color={focused?'#4aaaff':'#888'} />
+          tabBarIcon: ({ focused }) => 
+            <AntDesign 
+              name={focused?'clockcircle':'clockcircleo'} 
+              size={24} 
+              color={focused?'#4aaaff':'#888'} 
+            />
         }}
         initialParams={{
           data,
@@ -100,7 +109,12 @@ export default function ForecastRouter({ route }) {
             paddingBottom: 25
           },
           tabBarLabel: "Diária",
-          tabBarIcon: ({ focused }) => <Ionicons name={focused?'md-today':'md-today-sharp'} size={24} color={focused?'#4aaaff':'#888'} />
+          tabBarIcon: ({ focused }) => 
+            <Ionicons 
+              name={focused?'md-today':'md-today-sharp'} 
+              size={24} 
+              color={focused?'#4aaaff':'#888'} 
+            />
         }}
         initialParams={{
           data,
