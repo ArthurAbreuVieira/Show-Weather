@@ -62,7 +62,7 @@ export default function Forecast({ navigation, route }) {
           }}
         >
           {selectedDay === "today" &&
-            <HourlyCard navigation={navigation} data={dataOfDay}/>}
+            <HourlyCard navigation={navigation} data={dataOfDay} theme={theme}/>}
 
           <Section>
             <Title>Detalhes</Title>

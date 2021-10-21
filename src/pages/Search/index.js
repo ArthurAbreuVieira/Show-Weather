@@ -116,7 +116,8 @@ export default function Search({ navigation, route }) {
       
       navigation.navigate("ForecastRouter", { 
         data: JSON.stringify(data), 
-        location: `${cityData.name}, ${cityData.sys.country}`
+        location: `${cityData.name}, ${cityData.sys.country}`,
+        theme
       });
     }
   }
