@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Dimensions } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 import { ThemeProvider } from 'styled-components';
 
@@ -19,7 +19,7 @@ import {
   Title,
   Text,
   SearchButton,
-  ClearButton,
+  ActionButton,
   Div,
 } from './styles';
 import SearchError from '../../components/SearchError';
@@ -45,7 +45,12 @@ export default function Search({ navigation, route }) {
 
   async function clearHistory() {
     setLoading(true);
-    return await AsyncStorage.setItem('@history', JSON.stringify([]));
+    await AsyncStorage.setItem('@history', JSON.stringify([]));
+    reloadHistory();
+  }
+
+  async function reloadHistory() {
+    setHistory(JSON.parse(await AsyncStorage.getItem('@history')) || []);
   }
 
   async function search(city) {
@@ -117,9 +122,7 @@ export default function Search({ navigation, route }) {
   }
 
   useEffect(() => {
-    (async () => {
-      setHistory(JSON.parse(await AsyncStorage.getItem('@history')) || []);
-    })();
+    reloadHistory();
   }, []);
 
   return (
@@ -148,17 +151,36 @@ export default function Search({ navigation, route }) {
           <Div 
             justify="space-evenly" 
             direction="row" 
-            width="86.5%"
+            width="100%"
           >
             <Title align="left" fullWidth >Pesquisas recentes</Title>
 
-            {history.length > 0 &&
-              <ClearButton onPress={async () => {
-                await clearHistory();
-                setLoading(false);
-              }}>
-                <FontAwesome5 name="trash-alt" size={24} color="#f00" />
-              </ClearButton>}
+            <Div 
+              justify="space-around" 
+              direction="row" 
+              width="30%"
+              position="absolute"
+              right="20px"
+              top="-5px"
+            >
+              <ActionButton onPress={async () => {
+                  reloadHistory();
+                  setLoading(false);
+                }}
+              >
+                <Ionicons name="reload" size={24} color="#4ac0ff" />
+              </ActionButton>
+
+              {history.length > 0 &&
+                <ActionButton onPress={async () => {
+                    await clearHistory();
+                    setLoading(false);
+                  }}
+                >
+                  <FontAwesome5 name="trash-alt" size={24} color="#f00" />
+                </ActionButton>
+              }
+            </Div>
 
           </Div>
           {history.length > 0 ?

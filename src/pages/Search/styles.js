@@ -53,7 +53,8 @@ export const Div = styled.View`
   height: ${({ height }) => height || 'auto'};
   position: ${({ position }) => position || 'relative'};
   z-index: ${({ hover }) => hover && 10 || 0};
-  top: 0;
+  right: ${({ right }) => right || 'auto'};
+  top: ${({ top }) => top || 0};
 `;
 
 export const SearchButton = styled.TouchableOpacity`
@@ -65,7 +66,7 @@ export const SearchButton = styled.TouchableOpacity`
   height: 50px;
 `;
 
-export const ClearButton = styled.TouchableOpacity`
+export const ActionButton = styled.TouchableOpacity`
   background-color: transparent;
   border-radius: 5px;
   justify-content: center;
